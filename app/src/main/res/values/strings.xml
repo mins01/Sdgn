@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sdgn</string>
+    <string name="list_row_imageView">유닛이미지</string>
+    <string name="list_row_textView">유닛명</string>
+</resources>
