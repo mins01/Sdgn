@@ -9,8 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.NetworkImageView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -19,20 +21,20 @@ import java.util.ArrayList;
  * Created by mins01 on 2016-02-22.
  */
 public class ListRowsAdapter extends BaseAdapter {
-    private ArrayList<JSONObject> lists;
-
+    private ArrayList<JSONObject> rows;
+    RequestQueue queue;
     public ListRowsAdapter(){
-        lists = new ArrayList<JSONObject>();
+        rows = new ArrayList<JSONObject>();
     }
 
     @Override
     public int getCount() {
-        return lists.size();
+        return rows.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return lists.get(position);
+        return rows.get(position);
     }
 
     @Override
@@ -42,11 +44,14 @@ public class ListRowsAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+
         final Context context = parent.getContext();
+        //queue = MySingleton.getInstance(context).getRequestQueue();
 
         NetworkImageView list_row_imageView;
         TextView list_row_textView;
         ListRowsHolder listRowsHolder;
+        JSONObject row = rows.get(position);
 
         if (convertView == null) {
             Log.i("getView", Context.LAYOUT_INFLATER_SERVICE);
@@ -66,11 +71,24 @@ public class ListRowsAdapter extends BaseAdapter {
         list_row_textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("onClick","클릭");
-                Toast.makeText(context,String.format("%02d",position),Toast.LENGTH_SHORT).show();
+                Log.i("onClick", "클릭");
+                Toast.makeText(context, String.format("%02d", position), Toast.LENGTH_SHORT).show();
             }
         });
-        list_row_textView.setText(String.format("%02d",position));
+        list_row_textView.setText(String.format("%02d", position));
+        String unit_img = null;
+        String unit_name = null;
+        try {
+            unit_img = row.getString("unit_img");
+            unit_name = row.getString("unit_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        list_row_textView.setText(unit_name);
+
+        list_row_imageView.setImageUrl(unit_img, MySingleton.getInstance(context).getImageLoader());
+
+
         return convertView;
     }
 
@@ -80,12 +98,12 @@ public class ListRowsAdapter extends BaseAdapter {
     }
 
     public void add(JSONObject jsonObject){
-        lists.add(jsonObject);
+        rows.add(jsonObject);
     }
     public void remove(int position){
-        lists.remove(position);
+        rows.remove(position);
     }
     public void clear(){
-        lists.clear();
+        rows.clear();
     }
 }

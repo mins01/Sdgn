@@ -6,7 +6,7 @@
 
     <com.android.volley.toolbox.NetworkImageView
     android:layout_width="56dp"
-    android:layout_height="69dp"
+    android:layout_height="169dp"
     android:id="@+id/list_row_imageView"
     android:background="@android:color/darker_gray"
     android:layout_margin="2dp"
