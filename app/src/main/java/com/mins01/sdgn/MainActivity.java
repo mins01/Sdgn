@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         firstAction();
+        MySingleton.getInstance(this).start();
         Log.i("onCreate", "END");
     }
     @Override
@@ -66,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop(){
         super.onStop();
-        MySingleton.getInstance(this).stop();
+
     }
     @Override
     public void onDestroy(){
         Log.i("onDestroy", "START");
         super.onDestroy();
+        MySingleton.getInstance(this).stop();
         Log.i("onDestroy", "END");
     }
     private void initUI(){

@@ -1,6 +1,7 @@
 package com.mins01.sdgn;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -48,10 +49,12 @@ public class MySingleton {
         getRequestQueue().add(req);
     }
     public void stop(){
+        Log.i("MySingleton", "stop");
         getRequestQueue().stop();
     }
     public void start(){
         getRequestQueue().start();
+        Log.i("MySingleton", "start");
     }
     public ImageLoader getImageLoader(){
         return imageLoader;
