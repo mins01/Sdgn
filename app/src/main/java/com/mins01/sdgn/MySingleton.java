@@ -47,10 +47,13 @@ public class MySingleton {
     public <T> void addToRequestQueue(Request<T> req){
         getRequestQueue().add(req);
     }
-    public ImageLoader getImageLoader(){
-        return imageLoader;
-    }
     public void stop(){
         getRequestQueue().stop();
+    }
+    public void start(){
+        getRequestQueue().start();
+    }
+    public ImageLoader getImageLoader(){
+        return imageLoader;
     }
 }

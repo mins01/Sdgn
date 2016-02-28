@@ -5,40 +5,9 @@
     android:layout_height="wrap_content">
 
     <include android:id="@+id/list_row_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="172dp"
+        android:layout_height="211dp"
         layout="@layout/layout_unit_card" />
-    <!--<RelativeLayout-->
-        <!--android:layout_width="172dp"-->
-        <!--android:layout_height="211dp"-->
-        <!--android:background="@drawable/layout_rounded_black"-->
-        <!--android:id="@+id/list_row_relativeLayout"-->
-        <!--android:padding="2dp"-->
-        <!-->-->
-        <!--<com.android.volley.toolbox.NetworkImageView-->
-        <!--android:layout_width="168dp"-->
-        <!--android:layout_height="207dp"-->
-        <!--android:id="@+id/list_row_imageView"-->
-        <!--android:background="@android:color/black"-->
-        <!--android:layout_margin="2dp"-->
-        <!--android:layout_gravity="start|center_vertical"-->
-        <!--android:contentDescription="@string/list_row_imageView"-->
-        <!--/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/list_row_textView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-
-            <!--android:text="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:textSize="16dp"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@android:color/primary_text_dark"-->
-            <!--android:contentDescription="@string/list_row_textView"-->
-            <!--android:background="@drawable/bg_unit_name"-->
-            <!--android:layout_margin="2dp"/>-->
-    <!--</RelativeLayout>-->
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

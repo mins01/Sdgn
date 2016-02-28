@@ -7,6 +7,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:fitsSystemWindows="true"
     tools:context="com.mins01.sdgn.MainActivity">
 
     <!--<TextView-->
@@ -20,7 +21,15 @@
 
     <Button
         android:id="@+id/main_reload_btn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="다시읽기"/>
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+
+        android:background="@android:drawable/ic_menu_rotate"
+        android:text=""/>
 </RelativeLayout>
