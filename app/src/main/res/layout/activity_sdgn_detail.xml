@@ -9,5 +9,9 @@
     android:paddingRight="@dimen/no_margin"
     android:paddingTop="@dimen/no_margin"
     tools:context="com.mins01.sdgn.SdgnDetailActivity">
-    <include layout="@layout/activity_sdgn_detail_top"/>
+
+    <include layout="@layout/activity_sdgn_detail_top" android:id="@+id/activity_sdgn_detail_top"/>
+
+    <include layout="@layout/activity_sdgn_detail_content" android:id="@+id/activity_sdgn_detail_content"/>
+
 </LinearLayout>
