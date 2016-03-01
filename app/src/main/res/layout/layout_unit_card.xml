@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="172dp"
     android:layout_height="211dp"
     android:background="@drawable/layout_rounded_black"
     android:id="@+id/list_row_relativeLayout"
     android:padding="2dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_gravity="center_horizontal"
+
+    android:clickable="true">
         <com.android.volley.toolbox.NetworkImageView
         android:layout_width="168dp"
         android:layout_height="207dp"
@@ -98,4 +101,3 @@
     </LinearLayout>
 
 </RelativeLayout>
-

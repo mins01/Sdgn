@@ -2,4 +2,6 @@
     <string name="app_name">Sdgn</string>
     <string name="list_row_imageView">유닛이미지</string>
     <string name="list_row_textView">유닛명</string>
+    <string name="title_activity_lists">SD 건담 넥스트 에볼류션 유닛</string>
+    <string name="title_activity_detail">SD 건담 넥스트 에볼류션 유닛 상세</string>
 </resources>

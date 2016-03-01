@@ -20,7 +20,7 @@
         android:layout_height="wrap_content" android:padding="2dp" />
 
     <Button
-        android:id="@+id/main_reload_btn"
+        android:id="@+id/main_btn_reload"
         android:textStyle="bold"
         android:textSize="30dp"
         android:layout_width="60dp"
@@ -32,4 +32,14 @@
 
         android:background="@android:drawable/ic_menu_rotate"
         android:text=""/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OPEN"
+        android:id="@+id/main_btn_test"
+        android:layout_alignBottom="@+id/main_btn_reload"
+        android:layout_toLeftOf="@+id/main_btn_reload"
+        android:layout_toStartOf="@+id/main_btn_reload" />
 </RelativeLayout>

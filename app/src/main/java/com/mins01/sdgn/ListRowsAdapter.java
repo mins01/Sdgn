@@ -59,7 +59,7 @@ public class ListRowsAdapter extends BaseAdapter {
         JSONObject row = rows.get(position);
 
         if (convertView == null) {
-            Log.i("getView", Context.LAYOUT_INFLATER_SERVICE);
+            //Log.i("getView", Context.LAYOUT_INFLATER_SERVICE);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_row, parent, false);
 
