@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/half_margin"
     android:paddingRight="@dimen/half_margin"
     android:paddingTop="@dimen/half_margin"
-    tools:context="com.mins01.sdgn.SdgnDetailActivity">
+    tools:context="com.mins01.app001.SdgnDetailActivity">
     <include layout="@layout/layout_unit_card"
         android:layout_width="172dp"
         android:layout_height="211dp" />
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+                android:text="-"
                 />
         </ScrollView>
     </LinearLayout>

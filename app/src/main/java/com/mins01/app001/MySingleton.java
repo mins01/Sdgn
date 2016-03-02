@@ -1,4 +1,4 @@
-package com.mins01.sdgn;
+package com.mins01.app001;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 
+import java.io.File;
+
 /**
  * JSON과 이미지 캐싱 가능 통신용
  */
@@ -24,9 +26,17 @@ public class MySingleton {
 
     private MySingleton(Context i_context){
         context = i_context;
+        //int maxMemorySize = MyBitmapLruCache.getMaxCacheSize();
+//        int maxMemorySize = 2*1024*1024; //
+//        int maxDiskSize = 5*1024*1024;
+        //Log.i("getFilesDir()",context.getFilesDir().getAbsolutePath());
+//        File cacheDir = context.getCacheDir();
+        File cacheDir = context.getFilesDir();
+//        imageLoader = new MyImageLoader(getRequestQueue(),new MyBitmapLruCache(maxMemorySize,cacheDir,maxDiskSize),true); //이미지 강제캐싱한다.
+        //imageLoader = new MyImageLoader(getRequestQueue(),new DiskBitmapCache(cacheDir),true); //이미지 강제캐싱한다.
         imageLoader = new MyImageLoader(getRequestQueue(),new BitmapLruCache(),true); //이미지 강제캐싱한다.
         //-- 강제 캐싱용 설정값
-        MyHttpHeaderParser.cacheExpired_sec=10*60*1000; //강제 캐싱 msec
+        MyHttpHeaderParser.cacheExpired_sec=30*60*1000; //강제 캐싱 msec
         MyHttpHeaderParser.cacheExpired_sec=24 * 60 * 60 * 1000; //강제 캐싱 msec
     }
     public static synchronized MySingleton getInstance(Context context){

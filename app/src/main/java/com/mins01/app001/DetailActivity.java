@@ -1,4 +1,4 @@
-package com.mins01.sdgn;
+package com.mins01.app001;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

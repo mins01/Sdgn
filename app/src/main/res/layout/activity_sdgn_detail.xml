@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/no_margin"
         android:paddingRight="@dimen/no_margin"
         android:paddingTop="@dimen/no_margin"
-        tools:context="com.mins01.sdgn.SdgnDetailActivity">
+        tools:context="com.mins01.app001.SdgnDetailActivity">
 
         <include layout="@layout/activity_sdgn_detail_top" android:id="@+id/activity_sdgn_detail_top"/>
 

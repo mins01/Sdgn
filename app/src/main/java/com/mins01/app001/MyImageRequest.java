@@ -16,7 +16,7 @@
 /**
  * Cpoy from ImageRequest.class
  */
-package com.mins01.sdgn;
+package com.mins01.app001;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

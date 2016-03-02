@@ -1,4 +1,4 @@
-package com.mins01.sdgn;
+package com.mins01.app001;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;

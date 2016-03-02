@@ -18,4 +18,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orderInCategory="100"
         android:title="제작:공대여자"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/app_version"
+        android:orderInCategory="100"
+        android:title="버전"
+        app:showAsAction="never" />
 </menu>
