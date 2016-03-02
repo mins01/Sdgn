@@ -107,7 +107,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
                 tmp = row.getString("unit_skill"+(i+1)+"_img");
                 if(tmp!=null && tmp.length()>1){
                     ((NetworkImageView)imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-                    ((TextView)texts.getChildAt(i)).setText( row.getString("unit_skill"+(i+1)));
+                    ((TextView)texts.getChildAt(i)).setText( "["+row.getString("unit_skill"+(i+1))+"]\n"+row.getString("unit_skill"+(i+1)+"_desc"));
                 }else{
                     ((NetworkImageView)imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
                     ((TextView)texts.getChildAt(i)).setText("");
@@ -115,7 +115,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
             }
 
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }

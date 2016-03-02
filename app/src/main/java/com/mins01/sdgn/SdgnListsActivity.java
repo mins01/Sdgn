@@ -2,6 +2,8 @@ package com.mins01.sdgn;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,6 +46,8 @@ public class SdgnListsActivity extends AppCompatActivity {
         Log.i("onCreate", "START");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sdgn_lists);
+        this.setTitle(R.string.app_name);
+        adView = (AdView) findViewById(R.id.adView);
         firstAction();
         MySingleton.getInstance(this).start();
         Log.i("onCreate", "END");
@@ -53,6 +57,7 @@ public class SdgnListsActivity extends AppCompatActivity {
         Log.i("onStart", "START");
         super.onStart();
         //initUI();
+
         Log.i("onStart", "END");
     }
     @Override
@@ -67,12 +72,15 @@ public class SdgnListsActivity extends AppCompatActivity {
     public void onResume(){
         Log.i("onResume", "START");
         super.onResume();
+        adView.resume();
         Log.i("onResume", "END");
     }
     @Override
     public void onPause(){
         Log.i("onPause", "START");
+        adView.pause();
         super.onPause();
+
         Log.i("onPause", "END");
     }
     @Override
@@ -81,16 +89,18 @@ public class SdgnListsActivity extends AppCompatActivity {
 
     }
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Log.i("onDestroy", "START");
+        adView.destroy();
         super.onDestroy();
         //MySingleton.getInstance(this).stop();
+
         Log.i("onDestroy", "END");
     }
     private void initAdMob(){
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        adView.loadAd(adRequest);
     }
     private void initUI(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -185,10 +195,10 @@ public class SdgnListsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.notice) {
-            String msg = "유닛이나 스킬 등의 이미지 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
-                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다. \n" +
+            String msg = "유닛이나 스킬 등의 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
+                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다.\n" +
                     "사용으로 인한 문제에 대해서는 책임지지 않습니다.\n" +
-                    "즐겁게 게임과 사이트를 즐깁시다.";
+                    "즐겁게 게임을 즐깁시다.";
 //            Toast.makeText(this,"유닛이나 스킬 등의 이미지 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
 //                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다. \n" +
 //                    "사용함으로 발생되는 불이익에 대해서는 책임지지 않습니다.\n" +
@@ -220,6 +230,19 @@ public class SdgnListsActivity extends AppCompatActivity {
             Uri uri = Uri.parse("http://sdgn.co.kr/");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
+            return true;
+        }else if(id == R.id.app_version){
+            PackageInfo pInfo;
+            try {
+                pInfo = getPackageManager().getPackageInfo(
+                        this.getPackageName(), 0);
+                int versionCode = pInfo.versionCode;
+                String versionName = pInfo.versionName;
+                Toast.makeText(this,"버전 "+versionName+" ("+versionCode+")",Toast.LENGTH_SHORT).show();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
             return true;
         }
 

@@ -2,6 +2,7 @@ package com.mins01.sdgn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 
 import com.android.volley.RequestQueue;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -78,6 +80,16 @@ public class GridRowsAdapter extends BaseAdapter {
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                try {
+                    String unit_idx = row.getString("unit_idx");
+                    String str = "http://www.mins01.com/sdgn/units?unit_idx="+unit_idx;
+
+                    Uri uri = Uri.parse(str);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    context.startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 return true;
             }
