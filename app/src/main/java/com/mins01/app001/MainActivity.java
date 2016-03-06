@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     static {
         com.android.volley.VolleyLog.DEBUG = true;
     }
+
     //private ArrayAdapter<String>  m_Adapter;
     private ListRowsAdapter m_Adapter;
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         MySingleton.getInstance(this).start();
         Log.i("onCreate", "END");
     }
+
     @Override
     public void onStart() {
         Log.i("onStart", "START");
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         Log.i("onStart", "END");
     }
+
     @Override
     public void onRestart() {
         //MySingleton.getInstance(this).start();
@@ -52,32 +55,37 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("onRestart", "END");
     }
+
     @Override
-    public void onResume(){
+    public void onResume() {
         Log.i("onResume", "START");
         super.onResume();
         Log.i("onResume", "END");
     }
+
     @Override
-    public void onPause(){
+    public void onPause() {
         Log.i("onPause", "START");
         super.onPause();
         Log.i("onPause", "END");
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
 
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Log.i("onDestroy", "START");
         super.onDestroy();
         //MySingleton.getInstance(this).stop();
         Log.i("onDestroy", "END");
     }
-    private void initUI(){
-        if(m_Adapter==null) {
+
+    private void initUI() {
+        if (m_Adapter == null) {
             m_Adapter = new ListRowsAdapter();
 
             ListView main_listView = (ListView) this.findViewById(R.id.main_listView);
@@ -101,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
-    private void firstLoad(){
+
+    private void firstLoad() {
         Log.i("firstLoad", "START");
-        Toast.makeText(getApplicationContext(),"최초 로드 시작",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "최초 로드 시작", Toast.LENGTH_SHORT).show();
         String url1 = "http://www.mins01.com/sdgn/json/units";
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
             @Override
@@ -111,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     m_Adapter.clear();
                     JSONArray su_rows = response.getJSONArray("su_rows");
-                    for(int i=0,m= su_rows.length();i<m;i++){
+                    for (int i = 0, m = su_rows.length(); i < m; i++) {
                         m_Adapter.add((JSONObject) su_rows.get(i));
                     }
-                    Toast.makeText(getApplicationContext(),"JSON 로드완료 : "+m_Adapter.getCount() ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "JSON 로드완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
 
                     e.printStackTrace();
@@ -125,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"JSON 로드에러 : " ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "JSON 로드에러 : ", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
@@ -138,10 +147,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private void firstAction(){
-        (new AsyncTask <MainActivity, Void, MainActivity>(){
-             @Override
+    private void firstAction() {
+        (new AsyncTask<MainActivity, Void, MainActivity>() {
+            @Override
             protected MainActivity doInBackground(MainActivity... params) {
                 return params[0];
             }

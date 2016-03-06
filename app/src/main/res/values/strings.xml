@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">건넥한마디</string>
+    <string name="app_title">건넥한마디</string>
     <string name="list_row_imageView">유닛이미지</string>
     <string name="list_row_textView">유닛명</string>
-    <string name="title_activity_lists">SD건담넥스트에볼루션</string>
+    <string name="title_activity_lists">건넥한마디</string>
     <string name="game_full_title">건넥</string>
     <string name="title_activity_detail">건넥한마디 유닛상세</string>
 </resources>

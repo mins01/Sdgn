@@ -12,9 +12,11 @@ import java.util.Map;
 public class MyHttpHeaderParser extends HttpHeaderParser {
     public static long cacheHitButRefreshed_sec = 600000;
     public static long cacheExpired_sec = 86400000;
+
     /**
      * Extracts a {@link Cache.Entry} from a {@link NetworkResponse}.
      * Cache-control headers are ignored. SoftTtl == 10 mins, ttl == 24 hours.
+     *
      * @param response The network response to parse headers from
      * @return a cache entry for the given response, or null if the response is not cacheable.
      */

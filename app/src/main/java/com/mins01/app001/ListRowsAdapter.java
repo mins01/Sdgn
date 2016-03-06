@@ -25,7 +25,8 @@ import java.util.ArrayList;
 public class ListRowsAdapter extends BaseAdapter {
     private ArrayList<JSONObject> rows;
     RequestQueue queue;
-    public ListRowsAdapter(){
+
+    public ListRowsAdapter() {
         rows = new ArrayList<>();
     }
 
@@ -68,7 +69,7 @@ public class ListRowsAdapter extends BaseAdapter {
             listRowsHolder.txtview_unit_name = (TextView) convertView.findViewById(R.id.txtview_unit_name);
             listRowsHolder.txtview_unit_properties = (TextView) convertView.findViewById(R.id.txtview_unit_properties);
             listRowsHolder.txtview_unit_rank = (TextView) convertView.findViewById(R.id.txtview_unit_rank);
-            listRowsHolder.imageview_avg_stars =  new ArrayList<>();
+            listRowsHolder.imageview_avg_stars = new ArrayList<>();
             listRowsHolder.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_0));
             listRowsHolder.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_1));
             listRowsHolder.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_2));
@@ -76,7 +77,7 @@ public class ListRowsAdapter extends BaseAdapter {
             listRowsHolder.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_4));
 
             convertView.setTag(listRowsHolder);
-        }else{
+        } else {
             listRowsHolder = (ListRowsHolder) convertView.getTag();
         }
         list_row_imageView = listRowsHolder.list_row_imageView;
@@ -95,35 +96,47 @@ public class ListRowsAdapter extends BaseAdapter {
         try {
             txtview_unit_name.setText(row.getString("unit_name"));
             txtview_unit_rank.setText(row.getString("unit_rank"));
-            int tmp_color=0;
-            switch(row.getString("unit_rank")) {
+            int tmp_color = 0;
+            switch (row.getString("unit_rank")) {
                 case "C":
-                     tmp_color = ContextCompat.getColor(context,R.color.colorUnitRankC);
+                    tmp_color = ContextCompat.getColor(context, R.color.colorUnitRankC);
                     break;
-                case "B": tmp_color = ContextCompat.getColor(context,R.color.colorUnitRankB);break;
-                case "A": tmp_color = ContextCompat.getColor(context,R.color.colorUnitRankA);break;
-                case "S": tmp_color = ContextCompat.getColor(context,R.color.colorUnitRankS);break;
+                case "B":
+                    tmp_color = ContextCompat.getColor(context, R.color.colorUnitRankB);
+                    break;
+                case "A":
+                    tmp_color = ContextCompat.getColor(context, R.color.colorUnitRankA);
+                    break;
+                case "S":
+                    tmp_color = ContextCompat.getColor(context, R.color.colorUnitRankS);
+                    break;
             }
             txtview_unit_rank.setTextColor(tmp_color);
-            boolean[] temp_arr = {false,false,false,false,false};
+            boolean[] temp_arr = {false, false, false, false, false};
 
-            switch((int) Math.round(row.getDouble("avg_star"))) {
-                case 5: temp_arr[4]=true;
-                case 4: temp_arr[3]=true;
-                case 3: temp_arr[2]=true;
-                case 2: temp_arr[1]=true;
-                case 1: temp_arr[0]=true;
-                case 0:break;
+            switch ((int) Math.round(row.getDouble("avg_star"))) {
+                case 5:
+                    temp_arr[4] = true;
+                case 4:
+                    temp_arr[3] = true;
+                case 3:
+                    temp_arr[2] = true;
+                case 2:
+                    temp_arr[1] = true;
+                case 1:
+                    temp_arr[0] = true;
+                case 0:
+                    break;
                 default:
                     break;
             }
-            for(int i=0,m=temp_arr.length;i<m;i++){
-                listRowsHolder.imageview_avg_stars.get(i).setBackgroundResource(temp_arr[i]?android.R.drawable.star_on:android.R.drawable.star_off);
+            for (int i = 0, m = temp_arr.length; i < m; i++) {
+                listRowsHolder.imageview_avg_stars.get(i).setBackgroundResource(temp_arr[i] ? android.R.drawable.star_on : android.R.drawable.star_off);
             }
 
 
             txtview_unit_properties.setText(row.getString("unit_properties"));
-            switch(row.getInt("unit_properties_num")){
+            switch (row.getInt("unit_properties_num")) {
                 case 1:
                     txtview_unit_properties.setBackgroundResource(R.drawable.bg_unit_type_1);
                     break;
@@ -143,13 +156,10 @@ public class ListRowsAdapter extends BaseAdapter {
         }
 
 
-
-
-
         return convertView;
     }
 
-    private class ListRowsHolder{
+    private class ListRowsHolder {
         NetworkImageView list_row_imageView;
         TextView txtview_unit_name;
         TextView txtview_unit_properties;
@@ -157,13 +167,15 @@ public class ListRowsAdapter extends BaseAdapter {
         ArrayList<ImageView> imageview_avg_stars;
     }
 
-    public void add(JSONObject jsonObject){
+    public void add(JSONObject jsonObject) {
         rows.add(jsonObject);
     }
-    public void remove(int position){
+
+    public void remove(int position) {
         rows.remove(position);
     }
-    public void clear(){
+
+    public void clear() {
         rows.clear();
     }
 }

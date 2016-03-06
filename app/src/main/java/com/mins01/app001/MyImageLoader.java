@@ -15,6 +15,7 @@ import com.android.volley.toolbox.ImageLoader;
 public class MyImageLoader extends ImageLoader {
     // 강제 캐싱 설정 관련. true면 강제로 캐싱한다.
     protected boolean forced_cache = false;
+
     /**
      * Constructs a new ImageLoader.
      *
@@ -25,9 +26,11 @@ public class MyImageLoader extends ImageLoader {
         super(queue, imageCache);
         this.forced_cache = _forced_cache;
     }
+
     public MyImageLoader(RequestQueue queue, ImageCache imageCache) {
         super(queue, imageCache);
     }
+
     @Override
     protected Request<Bitmap> makeImageRequest(String requestUrl, int maxWidth, int maxHeight,
                                                ImageView.ScaleType scaleType, final String cacheKey) {

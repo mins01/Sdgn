@@ -2,27 +2,27 @@ package com.mins01.app001;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 /**
- * LIST용
+ * 한마디용
  */
-public class GridRowsAdapter extends BaseAdapter {
+public class BcRowsAdapter extends BaseAdapter {
     private ArrayList<JSONObject> rows;
     RequestQueue queue;
 
-    public GridRowsAdapter() {
+    public BcRowsAdapter() {
         rows = new ArrayList<>();
     }
 
@@ -56,45 +56,35 @@ public class GridRowsAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         Log.i("getView", String.valueOf(position));
         final Context context = parent.getContext();
-        UnitCardHolder unitCardHolder;
+        ViewHolder holder;
 
         final JSONObject row = rows.get(position);
         if (convertView == null) {
 
             Log.i("getView", Context.LAYOUT_INFLATER_SERVICE);
-            unitCardHolder = new UnitCardHolder();
-            convertView = unitCardHolder.createView(parent);
-            unitCardHolder.setMemberVar(convertView);
+            holder = new ViewHolder();
 
-            convertView.setTag(unitCardHolder);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.bc_row_sdgn_detail_comment, parent, false);
+
+            holder.textView_bc_name = (TextView) convertView.findViewById(R.id.textView_bc_name);
+            holder.textView_bc_insert_date = (TextView) convertView.findViewById(R.id.textView_bc_insert_date);
+            holder.textView_bc_comment = (TextView) convertView.findViewById(R.id.textView_bc_comment);
+
+            convertView.setTag(holder);
         } else {
-            unitCardHolder = (UnitCardHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        unitCardHolder.setValues(row, convertView);
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onclick(context, row);
-            }
-        });
-        convertView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                try {
-                    String unit_idx = row.getString("unit_idx");
-                    String str = "http://www.mins01.com/sdgn/units?unit_idx=" + unit_idx;
+        try{
+            holder.textView_bc_name.setText(row.getString("bc_name"));
+            holder.textView_bc_insert_date.setText(row.getString("bc_insert_date"));
+            holder.textView_bc_comment.setText(row.getString("bc_comment"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-                    Uri uri = Uri.parse(str);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    context.startActivity(intent);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                return true;
-            }
-        });
         return convertView;
     }
 
@@ -109,5 +99,13 @@ public class GridRowsAdapter extends BaseAdapter {
 
     public void clear() {
         rows.clear();
+    }
+
+    class ViewHolder{
+        TextView textView_bc_name;
+        TextView textView_bc_insert_date;
+        TextView textView_bc_comment;
+
+
     }
 }

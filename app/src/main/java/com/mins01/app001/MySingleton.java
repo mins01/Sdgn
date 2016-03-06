@@ -20,11 +20,11 @@ import java.io.File;
 public class MySingleton {
     private static Context context;
     private static MySingleton instacne = null;
-    private RequestQueue requestQueue =null;
+    private RequestQueue requestQueue = null;
     private MyImageLoader imageLoader;
 
 
-    private MySingleton(Context i_context){
+    private MySingleton(Context i_context) {
         context = i_context;
         //int maxMemorySize = MyBitmapLruCache.getMaxCacheSize();
 //        int maxMemorySize = 2*1024*1024; //
@@ -34,39 +34,45 @@ public class MySingleton {
         File cacheDir = context.getFilesDir();
 //        imageLoader = new MyImageLoader(getRequestQueue(),new MyBitmapLruCache(maxMemorySize,cacheDir,maxDiskSize),true); //이미지 강제캐싱한다.
         //imageLoader = new MyImageLoader(getRequestQueue(),new DiskBitmapCache(cacheDir),true); //이미지 강제캐싱한다.
-        imageLoader = new MyImageLoader(getRequestQueue(),new BitmapLruCache(),true); //이미지 강제캐싱한다.
+        imageLoader = new MyImageLoader(getRequestQueue(), new BitmapLruCache(), true); //이미지 강제캐싱한다.
         //-- 강제 캐싱용 설정값
-        MyHttpHeaderParser.cacheExpired_sec=30*60*1000; //강제 캐싱 msec
-        MyHttpHeaderParser.cacheExpired_sec=24 * 60 * 60 * 1000; //강제 캐싱 msec
+        MyHttpHeaderParser.cacheExpired_sec = 30 * 60 * 1000; //강제 캐싱 msec
+        MyHttpHeaderParser.cacheExpired_sec = 24 * 60 * 60 * 1000; //강제 캐싱 msec
     }
-    public static synchronized MySingleton getInstance(Context context){
-        if(instacne==null){
+
+    public static synchronized MySingleton getInstance(Context context) {
+        if (instacne == null) {
             instacne = new MySingleton(context);
         }
         return instacne;
     }
-    public RequestQueue getRequestQueue(){
-        if(requestQueue==null){
-            Cache cache = new DiskBasedCache(context.getCacheDir(),1024*1024);
+
+    public RequestQueue getRequestQueue() {
+        if (requestQueue == null) {
+            Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024);
             Network network = new BasicNetwork(new HurlStack());
-            requestQueue = new RequestQueue(cache,network,2);
+            requestQueue = new RequestQueue(cache, network, 2);
             requestQueue.start();
             //requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return requestQueue;
     }
-    public <T> void addToRequestQueue(Request<T> req){
+
+    public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     }
-    public void stop(){
+
+    public void stop() {
         Log.i("MySingleton", "stop");
         getRequestQueue().stop();
     }
-    public void start(){
+
+    public void start() {
         getRequestQueue().start();
         Log.i("MySingleton", "start");
     }
-    public ImageLoader getImageLoader(){
+
+    public ImageLoader getImageLoader() {
         return imageLoader;
     }
 }

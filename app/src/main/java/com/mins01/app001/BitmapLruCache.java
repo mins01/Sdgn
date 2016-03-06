@@ -6,7 +6,7 @@ import android.util.LruCache;
 import com.android.volley.toolbox.ImageLoader;
 
 /**
- *BitmapLruCache
+ * BitmapLruCache
  */
 public class BitmapLruCache extends LruCache<String, Bitmap>
         implements ImageLoader.ImageCache {
@@ -22,7 +22,7 @@ public class BitmapLruCache extends LruCache<String, Bitmap>
 
     @Override
     protected int sizeOf(String key, Bitmap value) {
-        return value.getRowBytes() * value.getHeight()/ 1024;
+        return value.getRowBytes() * value.getHeight() / 1024;
     }
 
     @Override

@@ -38,8 +38,9 @@ public class DiskBitmapCache extends DiskBasedCache implements ImageLoader.Image
 
         put(url, entry);
     }
+
     public static int getSizeInBytes(Bitmap bitmap) {
-        if (android.os.Build.VERSION.SDK_INT>=12) {
+        if (android.os.Build.VERSION.SDK_INT >= 12) {
             return bitmap.getByteCount();
         } else {
             return bitmap.getRowBytes() * bitmap.getHeight();

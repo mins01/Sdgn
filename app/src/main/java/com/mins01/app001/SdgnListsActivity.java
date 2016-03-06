@@ -24,11 +24,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 /**
  * First Activity
  */
@@ -36,22 +36,25 @@ public class SdgnListsActivity extends AppCompatActivity {
     static {
         com.android.volley.VolleyLog.DEBUG = true;
     }
-    private AdView adView;
+
+    //private AdView adView;
     private GridRowsAdapter m_Adapter;
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
     private long backpress_time_ms = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         backpress_time_ms = System.currentTimeMillis();
         Log.i("onCreate", "START");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sdgn_lists);
-        this.setTitle(R.string.app_name);
-        adView = (AdView) findViewById(R.id.adView);
+        this.setTitle(getResources().getString(R.string.app_title));
+//        adView = (AdView) findViewById(R.id.adView);
         firstAction();
         MySingleton.getInstance(this).start();
         Log.i("onCreate", "END");
     }
+
     @Override
     public void onStart() {
         Log.i("onStart", "START");
@@ -60,6 +63,7 @@ public class SdgnListsActivity extends AppCompatActivity {
 
         Log.i("onStart", "END");
     }
+
     @Override
     public void onRestart() {
         //MySingleton.getInstance(this).start();
@@ -68,45 +72,51 @@ public class SdgnListsActivity extends AppCompatActivity {
 
         Log.i("onRestart", "END");
     }
+
     @Override
-    public void onResume(){
+    public void onResume() {
         Log.i("onResume", "START");
         super.onResume();
-        adView.resume();
+//        adView.resume();
         Log.i("onResume", "END");
     }
+
     @Override
-    public void onPause(){
+    public void onPause() {
         Log.i("onPause", "START");
-        adView.pause();
+//        adView.pause();
         super.onPause();
 
         Log.i("onPause", "END");
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
 
     }
+
     @Override
     public void onDestroy() {
         Log.i("onDestroy", "START");
-        adView.destroy();
+//        adView.destroy();
         super.onDestroy();
         //MySingleton.getInstance(this).stop();
 
         Log.i("onDestroy", "END");
     }
-    private void initAdMob(){
+
+    private void initAdMob() {
 
         AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+//        adView.loadAd(adRequest);
     }
-    private void initUI(){
+
+    private void initUI() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(m_Adapter==null) {
+        if (m_Adapter == null) {
             m_Adapter = new GridRowsAdapter();
 
             GridView gridView = (GridView) this.findViewById(R.id.detail_gridView);
@@ -121,7 +131,8 @@ public class SdgnListsActivity extends AppCompatActivity {
             }
         });
     }
-    private void firstLoad(){
+
+    private void firstLoad() {
         Log.i("firstLoad", "START");
         //Toast.makeText(getApplicationContext(),"데이터 로딩",Toast.LENGTH_SHORT).show();
         String url1 = "http://www.mins01.com/sdgn/json/units";
@@ -131,11 +142,11 @@ public class SdgnListsActivity extends AppCompatActivity {
                 try {
                     m_Adapter.clear();
                     JSONArray su_rows = response.getJSONArray("su_rows");
-                    for(int i=0,m= su_rows.length();i<m;i++){
+                    for (int i = 0, m = su_rows.length(); i < m; i++) {
                         m_Adapter.add((JSONObject) su_rows.get(i));
                     }
-                    Toast.makeText(getApplicationContext(),"데이터 로드 완료 : "+m_Adapter.getCount() ,Toast.LENGTH_SHORT).show();
-                    SdgnListsActivity.this.setTitle(SdgnListsActivity.this.getTitle()+" - 총 "+m_Adapter.getCount()+"유닛");
+                    Toast.makeText(getApplicationContext(), "데이터 로드 완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
+                    SdgnListsActivity.this.setTitle(getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛");
                 } catch (JSONException e) {
 
                     e.printStackTrace();
@@ -146,7 +157,7 @@ public class SdgnListsActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"데이터 로드 에러 : " ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "데이터 로드 에러 : ", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
@@ -159,9 +170,8 @@ public class SdgnListsActivity extends AppCompatActivity {
     }
 
 
-
-    private void firstAction(){
-        (new AsyncTask<SdgnListsActivity, Void, SdgnListsActivity>(){
+    private void firstAction() {
+        (new AsyncTask<SdgnListsActivity, Void, SdgnListsActivity>() {
             @Override
             protected SdgnListsActivity doInBackground(SdgnListsActivity... params) {
                 return params[0];
@@ -219,26 +229,26 @@ public class SdgnListsActivity extends AppCompatActivity {
             alert.setMessage(msg);
             alert.show();
             return true;
-        }else if(id == R.id.developer){
-            Toast.makeText(this,"앱개발자 홈페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.developer) {
+            Toast.makeText(this, "앱개발자 홈페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
             Uri uri = Uri.parse("http://www.mins01.com");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
             return true;
-        }else if(id == R.id.game_site){
-            Toast.makeText(this,"SD건담 넥스트 에볼루션 사이트로 이동합니다.\n같이 게임해요.",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.game_site) {
+            Toast.makeText(this, "SD건담 넥스트 에볼루션 사이트로 이동합니다.\n같이 게임해요.", Toast.LENGTH_SHORT).show();
             Uri uri = Uri.parse("http://sdgn.co.kr/");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
             return true;
-        }else if(id == R.id.app_version){
+        } else if (id == R.id.app_version) {
             PackageInfo pInfo;
             try {
                 pInfo = getPackageManager().getPackageInfo(
                         this.getPackageName(), 0);
                 int versionCode = pInfo.versionCode;
                 String versionName = pInfo.versionName;
-                Toast.makeText(this,"버전 "+versionName+" ("+versionCode+")",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "버전 " + versionName + " (" + versionCode + ")", Toast.LENGTH_SHORT).show();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -252,10 +262,10 @@ public class SdgnListsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         long this_time_ms = System.currentTimeMillis();
-        if(this_time_ms-backpress_time_ms < 4000) {
+        if (this_time_ms - backpress_time_ms < 4000) {
             moveTaskToBack(true);
             finish();
-        }else {
+        } else {
             backpress_time_ms = this_time_ms;
             Toast.makeText(this, "다시 누르시면 종료합니다.", Toast.LENGTH_SHORT).show();
 

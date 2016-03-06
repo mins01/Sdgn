@@ -26,11 +26,10 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lists_old);
 
 
-
-
         //MySingleton.getInstance(this).start();
         Log.i("onCreate", "END");
     }
+
     @Override
     public void onStart() {
         Log.i("onStart", "START");
@@ -39,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         loadJson();
         Log.i("onStart", "END");
     }
+
     @Override
     public void onRestart() {
         //MySingleton.getInstance(this).start();
@@ -47,31 +47,36 @@ public class DetailActivity extends AppCompatActivity {
 
         Log.i("onRestart", "END");
     }
+
     @Override
-    public void onResume(){
+    public void onResume() {
         Log.i("onResume", "START");
         super.onResume();
         Log.i("onResume", "END");
     }
+
     @Override
-    public void onPause(){
+    public void onPause() {
         Log.i("onPause", "START");
         super.onPause();
         Log.i("onPause", "END");
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
 
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Log.i("onDestroy", "START");
         super.onDestroy();
         //MySingleton.getInstance(this).stop();
         Log.i("onDestroy", "END");
     }
-    private void initUI(){
+
+    private void initUI() {
         m_Adapter = new GridRowsAdapter();
 
         GridView gridView = (GridView) this.findViewById(R.id.detail_gridView);
@@ -79,8 +84,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-
-    private void loadJson(){
+    private void loadJson() {
         Log.i("firstLoad", "START");
         Toast.makeText(getApplicationContext(), "최초 로드 시작", Toast.LENGTH_SHORT).show();
         String url1 = "http://www.mins01.com/sdgn/json/units";
@@ -92,11 +96,11 @@ public class DetailActivity extends AppCompatActivity {
                 try {
 
                     JSONArray su_rows = response.getJSONArray("su_rows");
-                    for(int i=0,m= su_rows.length();i<m;i++){
+                    for (int i = 0, m = su_rows.length(); i < m; i++) {
                         m_Adapter.add((JSONObject) su_rows.get(i));
                     }
                     m_Adapter.notifyDataSetChanged();
-                    Toast.makeText(getApplicationContext(),"JSON 로드완료 : "+su_rows.length() ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "JSON 로드완료 : " + su_rows.length(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
 
                     e.printStackTrace();
@@ -105,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"JSON 로드에러 : " ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "JSON 로드에러 : ", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });

@@ -34,16 +34,16 @@
         <!--android:layout_margin="@dimen/fab_margin"-->
         <!--android:src="@android:drawable/ic_dialog_email" />-->
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|center_horizontal"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_unser_banner">
-    </com.google.android.gms.ads.AdView>
+    <!--<com.google.android.gms.ads.AdView-->
+        <!--android:id="@+id/adView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="bottom|center_horizontal"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="@string/admob_unser_banner">-->
+    <!--</com.google.android.gms.ads.AdView>-->
 
     <Button
         android:id="@+id/main_btn_reload"
