@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mins01.app001.SdgnDetailActivity"
+            android:name=".SdgnDetailActivity"
             android:label="@string/title_activity_detail"
            >
             <intent-filter>
