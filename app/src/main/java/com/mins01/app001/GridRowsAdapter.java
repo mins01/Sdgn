@@ -47,9 +47,22 @@ public class GridRowsAdapter extends BaseAdapter {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-        Intent intent = new Intent(context, SdgnDetailActivity.class);
-        intent.putExtra("row_jsonString", row.toString());
-        context.startActivity(intent);
+        Intent intentx = new Intent(context, SdgnDetailTabActivity.class);
+        try {
+            intentx.putExtra("unit_idx", row.getInt("unit_idx"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        context.startActivity(intentx);
+
+//        Intent intent = new Intent(context, SdgnDetailActivity.class);
+//        //intent.putExtra("row_jsonString", row.toString());
+//        try {
+//            intent.putExtra("unit_idx", row.getInt("unit_idx"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        context.startActivity(intent);
     }
 
     @Override

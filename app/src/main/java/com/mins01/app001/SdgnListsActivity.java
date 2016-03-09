@@ -29,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * First Activity
  */
@@ -135,37 +137,48 @@ public class SdgnListsActivity extends AppCompatActivity {
     private void firstLoad() {
         Log.i("firstLoad", "START");
         //Toast.makeText(getApplicationContext(),"데이터 로딩",Toast.LENGTH_SHORT).show();
-        String url1 = "http://www.mins01.com/sdgn/json/units";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    m_Adapter.clear();
-                    JSONArray su_rows = response.getJSONArray("su_rows");
-                    for (int i = 0, m = su_rows.length(); i < m; i++) {
-                        m_Adapter.add((JSONObject) su_rows.get(i));
+        final UnitRows unitRows = UnitRows.getInstance();
+        ArrayList su_rows = unitRows.getRows();
+        if(su_rows!=null){
+            for (int i = 0, m = su_rows.size(); i < m; i++) {
+                m_Adapter.add((JSONObject) su_rows.get(i));
+            }
+            m_Adapter.notifyDataSetChanged();
+        }else{
+            String url1 = "http://www.mins01.com/sdgn/json/units";
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        m_Adapter.clear();
+                        JSONArray su_rows = response.getJSONArray("su_rows");
+                        unitRows.setRows(su_rows);
+                        for (int i = 0, m = su_rows.length(); i < m; i++) {
+                            m_Adapter.add((JSONObject) su_rows.get(i));
+                        }
+                        Toast.makeText(getApplicationContext(), "데이터 로드 완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
+                        SdgnListsActivity.this.setTitle(getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛");
+                    } catch (JSONException e) {
+
+                        e.printStackTrace();
                     }
-                    Toast.makeText(getApplicationContext(), "데이터 로드 완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
-                    SdgnListsActivity.this.setTitle(getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛");
-                } catch (JSONException e) {
 
-                    e.printStackTrace();
+                    m_Adapter.notifyDataSetChanged();
                 }
-
-                m_Adapter.notifyDataSetChanged();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "데이터 로드 에러 : ", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-            }
-        });
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_SOCKET_TIMEOUT_MS,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "데이터 로드 에러 : ", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                }
+            });
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_SOCKET_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        }
         Log.i("firstLoad", "END");
     }
 

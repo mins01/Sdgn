@@ -27,6 +27,7 @@ import java.util.Date;
 
 public class SdgnDetailActivity extends AppCompatActivity {
     private JSONObject row;
+    private int unit_idx;
 //    private BcRowsAdapter m_Adapter;
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
     @Override
@@ -34,13 +35,10 @@ public class SdgnDetailActivity extends AppCompatActivity {
         Log.i("onCreate", "START");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sdgn_detail);
+        UnitRows unitrow = UnitRows.getInstance();
 
-        try {
-            row = new JSONObject(getIntent().getStringExtra("row_jsonString"));
-            this.setTitle(row.getString("unit_name") + " - 유닛 상세");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        unit_idx = getIntent().getIntExtra("unit_idx",0);
+        row = unitrow.getRowByUnitIdx(unit_idx);
 
         firstAction();
         Log.i("onCreate", "END");
@@ -154,7 +152,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
         try{
             url1 +=row.getString("unit_idx");
         }catch (Exception e){
-
+            e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
             @Override
@@ -246,7 +244,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
                 //super.onPostExecute(result);
                 //result.firstLoad();
                 initUI();
-                firstLoad();
+               // firstLoad();
             }
 
         }).execute(this);
