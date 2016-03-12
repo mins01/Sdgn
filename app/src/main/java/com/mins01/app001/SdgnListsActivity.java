@@ -139,12 +139,12 @@ public class SdgnListsActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),"데이터 로딩",Toast.LENGTH_SHORT).show();
         final UnitRows unitRows = UnitRows.getInstance();
         ArrayList su_rows = unitRows.getRows();
-        if(su_rows!=null){
+        if (su_rows != null) {
             for (int i = 0, m = su_rows.size(); i < m; i++) {
                 m_Adapter.add((JSONObject) su_rows.get(i));
             }
             m_Adapter.notifyDataSetChanged();
-        }else{
+        } else {
             String url1 = "http://www.mins01.com/sdgn/json/units";
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
                 @Override

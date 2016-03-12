@@ -31,8 +31,9 @@ import java.util.Date;
 public class SdgnDetailActivity extends AppCompatActivity {
     private JSONObject row;
     private int unit_idx;
-//    private BcRowsAdapter m_Adapter;
+    //    private BcRowsAdapter m_Adapter;
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("onCreate", "START");
@@ -40,7 +41,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sdgn_detail);
         UnitRows unitrow = UnitRows.getInstance();
 
-        unit_idx = getIntent().getIntExtra("unit_idx",0);
+        unit_idx = getIntent().getIntExtra("unit_idx", 0);
         row = unitrow.getRowByUnitIdx(unit_idx);
 
         firstAction();
@@ -139,9 +140,9 @@ public class SdgnDetailActivity extends AppCompatActivity {
 //        String url1 = "http://www.mins01.com/sdgn/json/units";
 
         String url1 = "http://www.mins01.com/mh/bbs_comment/sdgn_units/";
-        try{
-            url1 +=row.getString("unit_idx");
-        }catch (Exception e){
+        try {
+            url1 += row.getString("unit_idx");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
@@ -162,36 +163,46 @@ public class SdgnDetailActivity extends AppCompatActivity {
                         JSONObject bc_row = (JSONObject) bc_rows.get(i);
                         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         View convertView = inflater.inflate(R.layout.bc_row_sdgn_detail_comment, linearLayout_bc_rows, false);
-                        ((TextView)convertView.findViewById(R.id.textView_bc_name)).setText(bc_row.getString("bc_name"));
+                        ((TextView) convertView.findViewById(R.id.textView_bc_name)).setText(bc_row.getString("bc_name"));
                         Date d = null;
                         try {
                             d = parser.parse(bc_row.getString("bc_insert_date"));
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        ((TextView)convertView.findViewById(R.id.textView_bc_insert_date)).setText(formater.format(d));
-                        ((TextView)convertView.findViewById(R.id.textView_bc_comment)).setText(bc_row.getString("bc_comment"));
+                        ((TextView) convertView.findViewById(R.id.textView_bc_insert_date)).setText(formater.format(d));
+                        ((TextView) convertView.findViewById(R.id.textView_bc_comment)).setText(bc_row.getString("bc_comment"));
 
                         int bc_number = bc_row.getInt("bc_number");
                         String bc_number_str = "";
-                        switch(bc_number){
-                            case 0:break;
-                            case 1:bc_number_str="★☆☆☆☆";break;
-                            case 2:bc_number_str="★★☆☆☆";break;
-                            case 3:bc_number_str="★★★☆☆";break;
-                            case 4:bc_number_str="★★★★☆";break;
-                            case 5:bc_number_str="★★★★★";break;
+                        switch (bc_number) {
+                            case 0:
+                                break;
+                            case 1:
+                                bc_number_str = "★☆☆☆☆";
+                                break;
+                            case 2:
+                                bc_number_str = "★★☆☆☆";
+                                break;
+                            case 3:
+                                bc_number_str = "★★★☆☆";
+                                break;
+                            case 4:
+                                bc_number_str = "★★★★☆";
+                                break;
+                            case 5:
+                                bc_number_str = "★★★★★";
+                                break;
 
                         }
-                        TextView textView_bc_number = (TextView)convertView.findViewById(R.id.textView_bc_number);
-                        if(bc_number==0){
+                        TextView textView_bc_number = (TextView) convertView.findViewById(R.id.textView_bc_number);
+                        if (bc_number == 0) {
                             textView_bc_number.setVisibility(View.GONE);
-                        }else{
+                        } else {
                             textView_bc_number.setVisibility(View.VISIBLE);
                             textView_bc_number.setText(bc_number_str);
                         }
-
 
 
                         linearLayout_bc_rows.addView(convertView);
@@ -234,7 +245,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
                 //super.onPostExecute(result);
                 //result.firstLoad();
                 initUI();
-               // firstLoad();
+                // firstLoad();
             }
 
         }).execute(this);

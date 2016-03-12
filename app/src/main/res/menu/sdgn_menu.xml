@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/notice"
         android:orderInCategory="100"
@@ -22,5 +21,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/app_version"
         android:orderInCategory="100"
         android:title="버전"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_test"
+        android:orderInCategory="100"
+        android:title="테스트"
         app:showAsAction="never" />
 </menu>

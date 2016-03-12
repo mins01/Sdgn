@@ -8,35 +8,38 @@
     android:paddingLeft="@dimen/half_margin"
     android:paddingRight="@dimen/half_margin"
     android:paddingTop="@dimen/half_margin"
-    tools:context="com.mins01.app001.SdgnDetailActivity"
-    >
-    <include layout="@layout/layout_unit_card"
+    tools:context="com.mins01.app001.SdgnDetailActivity">
+
+    <include
+        layout="@layout/layout_unit_card"
         android:layout_width="172dp"
         android:layout_height="211dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/half_margin"
-        android:gravity="start"
-        >
+        android:gravity="start">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical">
+
             <com.android.volley.toolbox.NetworkImageView
                 android:layout_width="44dp"
                 android:layout_height="50dp"
                 android:id="@+id/imageView_unit_anime_img" />
+
             <TextView
                 android:id="@+id/textView_unit_anime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="출연작"
-                />
+                android:text="출연작" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -44,19 +47,19 @@
             android:background="@drawable/layout_rounded_gray"
             android:id="@+id/textView_bc_properties"
             android:gravity="center_horizontal" />
+
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="130dp">
+
             <TextView
                 android:id="@+id/textView_unit_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="유닛소개"
-                />
+                android:text="유닛소개" />
         </ScrollView>
     </LinearLayout>
-
 
 
 </LinearLayout>

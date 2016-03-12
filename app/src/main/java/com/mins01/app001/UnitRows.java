@@ -14,7 +14,7 @@ public class UnitRows {
     private static UnitRows instacne = null;
     public ArrayList<JSONObject> unit_rows = null;
 
-    public UnitRows(){
+    public UnitRows() {
         //unit_rows = new JSONArray();
 
     }
@@ -26,18 +26,20 @@ public class UnitRows {
         return instacne;
     }
 
-    public ArrayList getRows(){
+    public ArrayList getRows() {
         return unit_rows;
     }
+
     public JSONObject getRowByUnitIdx(String unit_idx) {
         return getRowByUnitIdx(Integer.parseInt(unit_idx, 10));
     }
-    public JSONObject getRowByUnitIdx(int unit_idx){
-        if(unit_rows==null) return null;
+
+    public JSONObject getRowByUnitIdx(int unit_idx) {
+        if (unit_rows == null) return null;
 
         for (int i = 0, m = unit_rows.size(); i < m; i++) {
             try {
-                if(unit_rows.get(i).getInt("unit_idx") == unit_idx){
+                if (unit_rows.get(i).getInt("unit_idx") == unit_idx) {
                     return unit_rows.get(i);
                 }
             } catch (JSONException e) {
@@ -47,8 +49,8 @@ public class UnitRows {
         return null;
     }
 
-    public void setRows(JSONArray jsonArray){
-        if(unit_rows==null) {
+    public void setRows(JSONArray jsonArray) {
+        if (unit_rows == null) {
             unit_rows = new ArrayList<>();
         }
         try {

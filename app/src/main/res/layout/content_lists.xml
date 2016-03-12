@@ -10,8 +10,7 @@
     android:paddingTop="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SdgnListsActivity"
-    tools:showIn="@layout/activity_sdgn_lists"
-    >
+    tools:showIn="@layout/activity_sdgn_lists">
 
     <GridView
         android:id="@+id/detail_gridView"
@@ -23,8 +22,6 @@
         android:gravity="center"
         android:clipToPadding="false"
         android:paddingTop="10dp"
-        android:paddingBottom="55dp"
-        >
-    </GridView>
+        android:paddingBottom="55dp"/>
 
 </RelativeLayout>

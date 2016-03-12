@@ -13,10 +13,12 @@
     android:background="@drawable/layout_rounded_gray"
 
     >
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,8 +27,8 @@
             android:id="@+id/textView_bc_name"
             android:layout_marginRight="15sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-             />
+            android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,8 +37,8 @@
             android:id="@+id/textView_bc_number"
             android:layout_marginRight="15sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            />
+            android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,15 +46,14 @@
             android:text="YY.mm.dd HH:ii"
             android:id="@+id/textView_bc_insert_date"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-             />
+            android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Comment"
         android:id="@+id/textView_bc_comment"
-        android:textColor="@color/colorPrimaryDark"
-        />
+        android:textColor="@color/colorPrimaryDark" />
 
 </LinearLayout>

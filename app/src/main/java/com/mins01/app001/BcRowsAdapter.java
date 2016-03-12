@@ -76,11 +76,11 @@ public class BcRowsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        try{
+        try {
             holder.textView_bc_name.setText(row.getString("bc_name"));
             holder.textView_bc_insert_date.setText(row.getString("bc_insert_date"));
             holder.textView_bc_comment.setText(row.getString("bc_comment"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -101,7 +101,7 @@ public class BcRowsAdapter extends BaseAdapter {
         rows.clear();
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView textView_bc_name;
         TextView textView_bc_insert_date;
         TextView textView_bc_comment;

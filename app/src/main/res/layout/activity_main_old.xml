@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivityOld">
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Hello World!" />-->
+    <ListView
+        android:id="@+id/main_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp" />
+
+    <Button
+        android:id="@+id/main_btn_reload"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+
+        android:background="@android:drawable/ic_menu_rotate"
+        android:text="" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OPEN"
+        android:id="@+id/main_btn_test"
+        android:layout_alignBottom="@+id/main_btn_reload"
+        android:layout_toLeftOf="@+id/main_btn_reload"
+        android:layout_toStartOf="@+id/main_btn_reload" />
+</RelativeLayout>

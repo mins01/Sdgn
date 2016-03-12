@@ -1,49 +1,58 @@
 package com.mins01.app001;
 
-import android.os.AsyncTask;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class MainActivity extends AppCompatActivity {
-    static {
-        com.android.volley.VolleyLog.DEBUG = true;
-    }
-
-    //private ArrayAdapter<String>  m_Adapter;
-    private ListRowsAdapter m_Adapter;
-    public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
-
+    private long backpress_time_ms = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("onCreate", "START");
+        backpress_time_ms = System.currentTimeMillis();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firstAction();
-        MySingleton.getInstance(this).start();
-        Log.i("onCreate", "END");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.getMenu().getItem(0).setChecked(true); //최초 메뉴를 기본 선택한다.
+        showFragment(R.id.nav_units_lists);
     }
 
     @Override
     public void onStart() {
         Log.i("onStart", "START");
         super.onStart();
-        initUI();
+        //initUI();
         Log.i("onStart", "END");
     }
 
@@ -52,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         //MySingleton.getInstance(this).start();
         Log.i("onRestart", "START");
         super.onRestart();
-
         Log.i("onRestart", "END");
     }
 
@@ -60,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         Log.i("onResume", "START");
         super.onResume();
+//        adView.resume();
         Log.i("onResume", "END");
     }
 
     @Override
     public void onPause() {
         Log.i("onPause", "START");
+//        adView.pause();
         super.onPause();
         Log.i("onPause", "END");
     }
@@ -73,94 +83,143 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
     public void onDestroy() {
         Log.i("onDestroy", "START");
+//        adView.destroy();
         super.onDestroy();
         //MySingleton.getInstance(this).stop();
         Log.i("onDestroy", "END");
     }
 
-    private void initUI() {
-        if (m_Adapter == null) {
-            m_Adapter = new ListRowsAdapter();
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            long this_time_ms = System.currentTimeMillis();
+            if (this_time_ms - backpress_time_ms < 4000) {
+                moveTaskToBack(true);
+                finish();
+            } else {
+                backpress_time_ms = this_time_ms;
+                Toast.makeText(this, "다시 누르시면 종료합니다.", Toast.LENGTH_SHORT).show();
 
-            ListView main_listView = (ListView) this.findViewById(R.id.main_listView);
-            main_listView.setAdapter(m_Adapter);
+            }
+            //super.onBackPressed();
         }
-        //리로드 버튼
-        Button main_btn_reload = (Button) findViewById(R.id.main_btn_reload);
-        main_btn_reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firstLoad();
-            }
-        });
-        //테스트 버튼
-//        ((Button) findViewById(R.id.main_btn_test)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(),"tab open",Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
-    private void firstLoad() {
-        Log.i("firstLoad", "START");
-        Toast.makeText(getApplicationContext(), "최초 로드 시작", Toast.LENGTH_SHORT).show();
-        String url1 = "http://www.mins01.com/sdgn/json/units";
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    m_Adapter.clear();
-                    JSONArray su_rows = response.getJSONArray("su_rows");
-                    for (int i = 0, m = su_rows.length(); i < m; i++) {
-                        m_Adapter.add((JSONObject) su_rows.get(i));
-                    }
-                    Toast.makeText(getApplicationContext(), "JSON 로드완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sdgn_menu, menu);
+        return true;
+    }
 
-                    e.printStackTrace();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.notice) {
+            String msg = "유닛이나 스킬 등의 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
+                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다.\n" +
+                    "사용으로 인한 문제에 대해서는 책임지지 않습니다.\n" +
+                    "즐겁게 게임을 즐깁시다.";
+//            Toast.makeText(this,"유닛이나 스킬 등의 이미지 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
+//                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다. \n" +
+//                    "사용함으로 발생되는 불이익에 대해서는 책임지지 않습니다.\n" +
+//                    "즐겁게 게임과 사이트를 즐깁시다.",Toast.LENGTH_LONG).show();
+//            Snackbar.make(this.getWindow().getDecorView(), "유닛이나 스킬 등의 이미지 저작권은 sdgn.co.kr에 문의해주시기 바랍니다.\n" +
+//                    "이 앱은 SD건담넥스트에볼루션 팬앱일 뿐입니다. \n" +
+//                    "사용함으로 발생되는 불이익에 대해서는 책임지지 않습니다.\n" +
+//                    "즐겁게 게임과 사이트를 즐깁시다.", Snackbar.LENGTH_LONG)
+//                    //.setAction(R.string.snackbar_action, myOnClickListener)
+//                    .show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();     //닫기
                 }
+            });
+            alert.setMessage(msg);
+            alert.show();
+            return true;
+        } else if (id == R.id.developer) {
+            Toast.makeText(this, "앱개발자 홈페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
+            Uri uri = Uri.parse("http://www.mins01.com");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.game_site) {
+            Toast.makeText(this, "SD건담 넥스트 에볼루션 사이트로 이동합니다.\n같이 게임해요.", Toast.LENGTH_SHORT).show();
+            Uri uri = Uri.parse("http://sdgn.co.kr/");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.app_version) {
+            PackageInfo pInfo;
+            try {
+                pInfo = getPackageManager().getPackageInfo(
+                        this.getPackageName(), 0);
+                int versionCode = pInfo.versionCode;
+                String versionName = pInfo.versionName;
+                Toast.makeText(this, "버전 " + versionName + " (" + versionCode + ")", Toast.LENGTH_SHORT).show();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
 
-                m_Adapter.notifyDataSetChanged();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "JSON 로드에러 : ", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-            }
-        });
-        jsObjRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_SOCKET_TIMEOUT_MS,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
-        Log.i("firstLoad", "END");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (!showFragment(id)) {
+            return false;
+        }
+//        if (id == R.id.nav_units_lists) {
+//            // Handle the camera action
+//        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
-    private void firstAction() {
-        (new AsyncTask<MainActivity, Void, MainActivity>() {
-            @Override
-            protected MainActivity doInBackground(MainActivity... params) {
-                return params[0];
-            }
+    public boolean showFragment(int id) {
+        Fragment fr;
+        switch (id) {
+            case R.id.nav_units_lists:
+                fr = new FragmentUnitsLists();
+                break;
+            case R.id.nav_test:
+                fr = new FragmentTest();
+                break;
+            default:
+                Log.i("플레그멘트보이기", "FALSE");
+                return false;
+        }
+        Log.i("플레그멘트보이기", fr.getClass().getName());
 
-            @Override
-            protected void onPostExecute(MainActivity result) {
-                //super.onPostExecute(result);
-                result.firstLoad();
-            }
 
-        }).execute(this);
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.commit();
+        return true;
     }
 
 }
