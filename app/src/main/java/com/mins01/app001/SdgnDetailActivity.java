@@ -1,3 +1,6 @@
+/**
+ * 이건 더이상 안 쓴다. SdgnDetailTabActivity를 대신 쓴다.
+ */
 package com.mins01.app001;
 
 import android.content.Context;
@@ -119,19 +122,6 @@ public class SdgnDetailActivity extends AppCompatActivity {
                     ((TextView) texts.getChildAt(i)).setText("");
                 }
             }
-            imgs = (LinearLayout) this.findViewById(R.id.group_unit_skill_img);
-            texts = (LinearLayout) this.findViewById(R.id.group_unit_skill);
-            for (int i = 0, m = 3; i < m; i++) {
-                tmp = row.getString("unit_skill" + (i + 1) + "_img");
-                if (tmp != null && tmp.length() > 1) {
-                    ((NetworkImageView) imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-                    ((TextView) texts.getChildAt(i)).setText("[" + row.getString("unit_skill" + (i + 1)) + "]\n" + row.getString("unit_skill" + (i + 1) + "_desc"));
-                } else {
-                    ((NetworkImageView) imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
-                    ((TextView) texts.getChildAt(i)).setText("");
-                }
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -2,76 +2,116 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container_scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <GridLayout
-
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/half_margin">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:useDefaultMargins="true"
-        android:columnCount="1"
-        android:rowCount="300">
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_margin="5dp"
             android:padding="5dp"
-
             android:text="스킬"
             android:textColor="#000"
             android:background="@drawable/layout_rounded_gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/group_unit_skill_img"
-            >
-            <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:contentDescription="스킬1"/>
-            <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:contentDescription="스킬2"/>
-            <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:contentDescription="스킬3"/>
-
+            android:orientation="horizontal" android:layout_margin="@dimen/half_margin"
+            android:weightSum="2">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <com.android.volley.toolbox.NetworkImageView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="스킬1"
+                    android:id="@+id/imageView_skill1_img"/>
+                <TextView
+                    android:id="@+id/imageView_skill1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스킬1"
+                    android:gravity="left"
+                    android:layout_toRightOf="@+id/imageView_skill1_img"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <com.android.volley.toolbox.NetworkImageView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="스킬2"
+                    android:id="@+id/imageView_skill2_img"/>
+                <TextView
+                    android:id="@+id/imageView_skill2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스킬2"
+                    android:gravity="left"
+                    android:layout_toRightOf="@+id/imageView_skill2_img"
+                    />
+            </RelativeLayout>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="필살기"
+            android:textColor="#000"
+            android:background="@drawable/layout_rounded_gray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/group_unit_skill"
-            android:weightSum="3"
-            >
-            <TextView
+            android:orientation="horizontal" android:layout_margin="@dimen/half_margin">
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="스킬1"
-                android:gravity="center"
-                android:layout_weight="1"
-                />
-            <TextView
+                android:layout_weight="1">
+                <com.android.volley.toolbox.NetworkImageView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="스킬3"
+                    android:id="@+id/imageView_skill3_img"/>
+                <TextView
+                    android:id="@+id/imageView_skill3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스킬3"
+                    android:gravity="left"
+                    android:layout_toRightOf="@+id/imageView_skill3_img"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="스킬2"
-                android:gravity="center"
-                android:layout_weight="1"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="스킬3"
-                android:gravity="center"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1">
+                <com.android.volley.toolbox.NetworkImageView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="스킬4"
+                    android:id="@+id/imageView_skill4_img"/>
+                <TextView
+                    android:id="@+id/imageView_skill4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스킬4"
+                    android:gravity="left"
+                    android:layout_toRightOf="@+id/imageView_skill4_img"
+                    />
+            </RelativeLayout>
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -210,5 +250,5 @@
                     />
             </LinearLayout>
         </LinearLayout>
-    </GridLayout>
+    </LinearLayout>
 </ScrollView>
