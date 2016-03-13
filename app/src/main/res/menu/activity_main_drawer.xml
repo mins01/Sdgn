@@ -10,6 +10,11 @@
             android:id="@+id/nav_test"
             android:title="테스트" />
     </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:title="로그인" />
+    </group>
     <!--<group android:checkableBehavior="single">-->
     <!--<item-->
     <!--android:id="@+id/nav_camera"-->

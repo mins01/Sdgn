@@ -3,6 +3,7 @@ package com.mins01.app001;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -188,9 +189,20 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (!showFragment(id)) {
-            return false;
+        switch (id){
+            case R.id.nav_login:
+                Context context = this.getBaseContext();
+                Intent intent = new Intent(context, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                break;
+            default:
+                if (!showFragment(id)) {
+                    return false;
+                }
+                break;
         }
+
 //        if (id == R.id.nav_units_lists) {
 //            // Handle the camera action
 //        }

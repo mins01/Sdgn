@@ -83,6 +83,7 @@ public class FragmentUnitsLists extends Fragment {
         final UnitRows unitRows = UnitRows.getInstance();
         ArrayList su_rows = unitRows.getRows();
         if (su_rows != null) {
+            m_Adapter.clear();
             for (int i = 0, m = su_rows.size(); i < m; i++) {
                 m_Adapter.add((JSONObject) su_rows.get(i));
             }
