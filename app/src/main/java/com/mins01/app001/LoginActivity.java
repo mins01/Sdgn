@@ -28,33 +28,40 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void submit(View v){
-        Toast.makeText(getBaseContext(),"로그인을 동작합니다.",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(),"로그인을 동작합니다.",Toast.LENGTH_SHORT).show();
         EditText editText_m_id = (EditText) findViewById(R.id.editText_m_id);
         EditText editText_m_pass = (EditText) findViewById(R.id.editText_m_pass);
         String m_id = editText_m_id.getText().toString();
         String m_pass = editText_m_pass.getText().toString();
 //        editText_m_id.setText("");
 //        editText_m_pass.setText("");
-        json_login(getBaseContext(),m_id,m_pass);
+        json_login(getBaseContext(), m_id, m_pass);
+    }
+
+    public void reset(){
+        ((EditText) findViewById(R.id.editText_m_id)).setText("");
+        ((EditText) findViewById(R.id.editText_m_pass)).setText("");
     }
 
     public void json_login(final Context context, final String m_id, final String m_pass){
-
+        final UserSession usess = UserSession.getInstance(context);
         Log.i("firstLoad", "START");
 
         String url1 = "http://www.mins01.com/mh/member/json_login";
 
 //        JSONObject postData = new JSONObject();
-        Map postData = new HashMap<String,String>();
+        Map<String, String> postData = new HashMap<>();
         postData.put("m_id",m_id);
         postData.put("m_pass",m_pass);
 
-        Log.i("XX",postData.toString());
         MyHttpRequest jsonObjectRequest = new MyHttpRequest(Request.Method.POST, url1, postData, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -64,13 +71,29 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.i("YY",jsonObject.toString());
-                Toast.makeText(context, "데이터 로드 성공 : "+jsonObject.toString(), Toast.LENGTH_LONG).show();
+                try {
+                    Boolean bool = jsonObject.getBoolean("is_error");
+                    if(bool){
+                        String msg = jsonObject.getString("msg");
+                        Toast.makeText(context, "로그인 실패 : "+msg, Toast.LENGTH_SHORT).show();
+                    }else if(jsonObject.has("m_nick") && jsonObject.has("enc_m_row")){
+                        usess.setUserData(jsonObject.getString("m_nick"),jsonObject.getString("enc_m_row"));
+                        Toast.makeText(context, usess.m_nick+"님 반갑습니다.", Toast.LENGTH_LONG).show();
+                        reset();
+                        finish();
+                    }else{
+                        Toast.makeText(context, "로그인 실패 : 알 수 없는 에러", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "데이터 로드 에러 : ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "로그인 실패 : 데이터 로드 에러", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
@@ -79,58 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, postData, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.i("YY",response.toString());
-//                Toast.makeText(context, "데이터 로드 성공 : "+response.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(context, "데이터 로드 에러 : ", Toast.LENGTH_SHORT).show();
-//                error.printStackTrace();
-//            }
-//        });
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                MY_SOCKET_TIMEOUT_MS,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-//        StringRequest postRequest = new StringRequest(Request.Method.POST, url1,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        // response
-//                        Log.d("Response", response);
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // error
-//                        //Log.d("Error.Response", response);
-//                        error.printStackTrace();
-//                    }
-//                }
-//        ) {
-//            @Override
-//            protected Map<String, String> getParams()
-//            {
-//                Map<String, String>  params = new HashMap<String, String>();
-//                params.put("m_id", m_id);
-//                params.put("m_pass", m_pass);
-//
-//                return params;
-//            }
-//        };
-//        postRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                MY_SOCKET_TIMEOUT_MS,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        MySingleton.getInstance(context).addToRequestQueue(postRequest);
+
         Log.i("firstLoad", "END");
     }
 

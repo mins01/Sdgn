@@ -31,11 +31,16 @@ public class FragmentUnitsLists extends Fragment {
     static {
         com.android.volley.VolleyLog.DEBUG = true;
     }
+    private String title;
 
     //private AdView adView;
     private GridRowsAdapter m_Adapter;
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
     private long backpress_time_ms = 0;
+
+    public FragmentUnitsLists(){
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +51,6 @@ public class FragmentUnitsLists extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(this.getClass().getName(), "onActivityCreated");
-
         super.onActivityCreated(savedInstanceState);
         firstAction();
     }
@@ -66,6 +70,12 @@ public class FragmentUnitsLists extends Fragment {
             GridView gridView = (GridView) activity.findViewById(R.id.detail_gridView);
             gridView.setAdapter(m_Adapter);
         }
+
+        if(title==null){
+            title = getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛";
+        }
+        activity.setTitle(title);
+
         //리로드 버튼
         Button main_btn_reload = (Button) activity.findViewById(R.id.main_btn_reload);
         main_btn_reload.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +98,8 @@ public class FragmentUnitsLists extends Fragment {
                 m_Adapter.add((JSONObject) su_rows.get(i));
             }
             m_Adapter.notifyDataSetChanged();
+            title = getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛";
+            activity.setTitle(title);
         } else {
             String url1 = "http://www.mins01.com/sdgn/json/units";
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
@@ -102,7 +114,8 @@ public class FragmentUnitsLists extends Fragment {
                             m_Adapter.add((JSONObject) su_rows.get(i));
                         }
                         Toast.makeText(activity.getBaseContext(), "데이터 로드 완료 : " + m_Adapter.getCount(), Toast.LENGTH_SHORT).show();
-                        activity.setTitle(getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛");
+                        title = getResources().getString(R.string.app_title) + " - 총 " + m_Adapter.getCount() + "유닛";
+                        activity.setTitle(title);
                     } catch (JSONException e) {
 
                         e.printStackTrace();

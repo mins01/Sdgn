@@ -29,6 +29,7 @@
         android:editable="true"
         android:inputType="textNoSuggestions"
         android:padding="5dp"
+        android:singleLine="true"
         />
     <View
         android:layout_width="match_parent"
@@ -49,6 +50,7 @@
         android:background="@drawable/layout_border_gray"
         android:editable="true"
         android:padding="5dp"
+        android:singleLine="true"
         />
     <Button
         android:layout_width="wrap_content"
