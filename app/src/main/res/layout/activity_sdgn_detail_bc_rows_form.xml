@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/half_margin">
+    <TextView
+        android:id="@+id/bc_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인이 필요합니다."
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/bc_comment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:singleLine="false"
+        android:background="@drawable/layout_border_gray"
+        android:hint="한마디를 입력하세요."
+        android:gravity="top|start"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" android:gravity="right">
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bc_number" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -81,18 +81,20 @@ public class FragmentUnitsLists extends Fragment {
         main_btn_reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstLoad();
+                firstLoad(true);
             }
         });
     }
-
     private void firstLoad() {
+        this.firstLoad(false);
+    }
+    private void firstLoad(boolean force) {
         final Activity activity = getActivity();
         Log.i("firstLoad", "START");
         //Toast.makeText(getApplicationContext(),"데이터 로딩",Toast.LENGTH_SHORT).show();
         final UnitRows unitRows = UnitRows.getInstance();
         ArrayList su_rows = unitRows.getRows();
-        if (su_rows != null) {
+        if (!force && su_rows != null) {
             m_Adapter.clear();
             for (int i = 0, m = su_rows.size(); i < m; i++) {
                 m_Adapter.add((JSONObject) su_rows.get(i));

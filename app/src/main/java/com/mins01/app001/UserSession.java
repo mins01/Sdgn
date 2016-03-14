@@ -3,7 +3,6 @@ package com.mins01.app001;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 /**
  * 사용자 로그인 정보 저장
@@ -33,8 +32,8 @@ public class UserSession {
     public  void initUserData(){
         m_nick = pref.getString("m_nick", "");
         enc_m_row = pref.getString("enc_m_row", "");
-        Log.i("m_nick",m_nick);
-        Log.i("enc_m_row",enc_m_row);
+//        Log.i("m_nick",m_nick);
+//        Log.i("enc_m_row",enc_m_row);
     }
     public  void setUserData(String m_nick,String enc_m_row){
         SharedPreferences.Editor editor = pref.edit();

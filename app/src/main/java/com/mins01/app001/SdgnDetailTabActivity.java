@@ -1,6 +1,7 @@
 package com.mins01.app001;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,12 +9,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +35,8 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SdgnDetailTabActivity extends AppCompatActivity {
     private JSONObject row;
@@ -145,7 +152,6 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
                     break;
                 case 2:
                     rootView = inflater.inflate(R.layout.activity_sdgn_detail_content, container, false);
-
                     break;
             }
             return rootView;
@@ -301,6 +307,66 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
 
     }
 
+    public void add_bc_rows(ViewGroup parent,JSONArray bc_rows){
+        try {
+            Context context = parent.getContext();
+            SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formater = new SimpleDateFormat("yy.M.d H:m");
+
+//                    ViewGroup parent = (ViewGroup) SdgnDetailTabActivity.this.getWindow().getDecorView().getRootView();
+            for (int i = 0, m = bc_rows.length(); i < m; i++) {
+//                        m_Adapter.add((JSONObject) bc_rows.get(i));
+                JSONObject bc_row = (JSONObject) bc_rows.get(i);
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View convertView = inflater.inflate(R.layout.bc_row_sdgn_detail_comment, parent, false);
+                ((TextView) convertView.findViewById(R.id.textView_bc_name)).setText(bc_row.getString("bc_name"));
+                Date d = null;
+                try {
+                    d = parser.parse(bc_row.getString("bc_insert_date"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                ((TextView) convertView.findViewById(R.id.textView_bc_insert_date)).setText(formater.format(d));
+                ((TextView) convertView.findViewById(R.id.textView_bc_comment)).setText(bc_row.getString("bc_comment"));
+
+                int bc_number = bc_row.getInt("bc_number");
+                String bc_number_str = "";
+                switch (bc_number) {
+                    case 0:
+                        break;
+                    case 1:
+                        bc_number_str = "★☆☆☆☆";
+                        break;
+                    case 2:
+                        bc_number_str = "★★☆☆☆";
+                        break;
+                    case 3:
+                        bc_number_str = "★★★☆☆";
+                        break;
+                    case 4:
+                        bc_number_str = "★★★★☆";
+                        break;
+                    case 5:
+                        bc_number_str = "★★★★★";
+                        break;
+
+                }
+                TextView textView_bc_number = (TextView) convertView.findViewById(R.id.textView_bc_number);
+                if (bc_number == 0) {
+                    textView_bc_number.setVisibility(View.GONE);
+                } else {
+                    textView_bc_number.setVisibility(View.VISIBLE);
+                    textView_bc_number.setText(bc_number_str);
+                }
+
+
+                parent.addView(convertView);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void firstLoad(final View view) {
         String url1 = "http://www.mins01.com/mh/bbs_comment/sdgn_units/";
@@ -319,68 +385,16 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
                     if (bc_rows != null) {
                         tabLayout.getTabAt(0).setText("한마디" + " (" + bc_rows.length() + ")");
                     }
-
-
-//                    Context context = SdgnDetailTabActivity.this.getApplicationContext();
-                    Context context = view.getContext();
-
-
-                    SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    SimpleDateFormat formater = new SimpleDateFormat("yy.M.d H:m");
-
-//                    ViewGroup parent = (ViewGroup) SdgnDetailTabActivity.this.getWindow().getDecorView().getRootView();
-                    for (int i = 0, m = bc_rows.length(); i < m; i++) {
-//                        m_Adapter.add((JSONObject) bc_rows.get(i));
-                        JSONObject bc_row = (JSONObject) bc_rows.get(i);
-                        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                        View convertView = inflater.inflate(R.layout.bc_row_sdgn_detail_comment, linearLayout_bc_rows, false);
-                        ((TextView) convertView.findViewById(R.id.textView_bc_name)).setText(bc_row.getString("bc_name"));
-                        Date d = null;
-                        try {
-                            d = parser.parse(bc_row.getString("bc_insert_date"));
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    add_bc_rows(linearLayout_bc_rows,bc_rows);
+                    final ScrollView sv = (ScrollView) findViewById(R.id.scrollView_bc_rows);
+                    sv.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            sv.fullScroll(ScrollView.FOCUS_DOWN);
                         }
-
-                        ((TextView) convertView.findViewById(R.id.textView_bc_insert_date)).setText(formater.format(d));
-                        ((TextView) convertView.findViewById(R.id.textView_bc_comment)).setText(bc_row.getString("bc_comment"));
-
-                        int bc_number = bc_row.getInt("bc_number");
-                        String bc_number_str = "";
-                        switch (bc_number) {
-                            case 0:
-                                break;
-                            case 1:
-                                bc_number_str = "★☆☆☆☆";
-                                break;
-                            case 2:
-                                bc_number_str = "★★☆☆☆";
-                                break;
-                            case 3:
-                                bc_number_str = "★★★☆☆";
-                                break;
-                            case 4:
-                                bc_number_str = "★★★★☆";
-                                break;
-                            case 5:
-                                bc_number_str = "★★★★★";
-                                break;
-
-                        }
-                        TextView textView_bc_number = (TextView) convertView.findViewById(R.id.textView_bc_number);
-                        if (bc_number == 0) {
-                            textView_bc_number.setVisibility(View.GONE);
-                        } else {
-                            textView_bc_number.setVisibility(View.VISIBLE);
-                            textView_bc_number.setText(bc_number_str);
-                        }
+                    });
 
 
-                        linearLayout_bc_rows.addView(convertView);
-                    }
-//                    Toast.makeText(getApplicationContext(), "데이터 로드 완료 : " + bc_rows.length(), Toast.LENGTH_SHORT).show();
-                    //SdgnListsActivity.this.setTitle(SdgnListsActivity.this.getTitle() + " - 총 " + m_Adapter.getCount() + "유닛");
-//                    Log.i("JSON LOAD",response.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -420,5 +434,127 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
             }
 
         }).execute(this);
+    }
+    public void btnClick(View v){
+        int id = v.getId();
+        switch(id){
+            case R.id.btn_write_comment_0:
+            case R.id.btn_write_comment:
+                showInputDialog();
+                break;
+        }
+
+    }
+    protected void showInputDialog() {
+        UserSession usess = UserSession.getInstance(this);
+        // get prompts.xml view
+        String m_nick = usess.m_nick;
+        if(m_nick.length()==0){
+            Context context = getBaseContext();
+            Toast.makeText(context,"로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+            //bc_name.setText("로그인이 필요합니다.");
+            return;
+        }
+
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View promptView = layoutInflater.inflate(R.layout.activity_sdgn_detail_bc_rows_form, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(promptView);
+
+        final TextView bc_name = (TextView) promptView.findViewById(R.id.bc_name);
+        bc_name.setText(m_nick);
+
+        final EditText bc_comment = (EditText) promptView.findViewById(R.id.bc_comment);
+        final RatingBar bc_number = (RatingBar) promptView.findViewById(R.id.bc_number);
+        bc_number.setStepSize((float)1);
+
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("남기기", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //resultText.setText("Hello, " + editText.getText());
+                        json_bc_write("write",String.valueOf(unit_idx),bc_comment.getText().toString()
+                                ,String.valueOf(Math.round(bc_number.getRating())));
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
+    public void json_bc_write(String mode,String unit_idx,String bc_comment,String bc_number){
+        final UserSession usess = UserSession.getInstance(this);
+
+        final Context context = getBaseContext();
+
+        Map<String,String> postData = new HashMap<>();
+        postData.put("bc_idx", "");
+        postData.put("enc_m_row",usess.enc_m_row);
+        postData.put("bc_comment",bc_comment);
+        postData.put("bc_number",bc_number);
+        postData.put("mode",mode);
+
+        String url1 = "http://www.mins01.com/mh/bbs_comment/sdgn_units/"+unit_idx;
+
+        LinearLayout linearLayout_bc_rows = (LinearLayout) findViewById(R.id.linearLayout_bc_rows);
+
+        MyHttpRequest jsonObjectRequest = new MyHttpRequest(Request.Method.POST, url1, postData, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("onResponse",response);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    LinearLayout linearLayout_bc_rows = (LinearLayout) findViewById(R.id.linearLayout_bc_rows);
+                    if(jsonObject != null && linearLayout_bc_rows!=null){
+                        if(!jsonObject.isNull("bc_rows")){
+                            add_bc_rows(linearLayout_bc_rows, jsonObject.getJSONArray("bc_rows"));
+                            final ScrollView sv = (ScrollView) findViewById(R.id.scrollView_bc_rows);
+                            sv.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sv.fullScroll(ScrollView.FOCUS_DOWN);
+                                }
+                            });
+                        }
+                    }
+                    String bc_idx = jsonObject.getString("bc_idx");
+                    if(bc_idx!=null){
+                        Toast.makeText(context,"한마디 성공", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(context, "한마디 실패 : 알 수 없는 에러", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "한마디 실패 : 데이터 로드 에러", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+        Log.i("firstLoad", "END");
     }
 }
