@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_units_lists:
                 fr = new FragmentUnitsLists();
                 break;
-            case R.id.nav_test:
-                fr = new FragmentTest();
-                break;
+//            case R.id.nav_test:
+//                fr = new FragmentTest();
+//                break;
             default:
                 Log.i("플레그멘트보이기", "FALSE");
                 return false;

@@ -94,8 +94,9 @@ public class FragmentUnitsLists extends Fragment {
         //Toast.makeText(getApplicationContext(),"데이터 로딩",Toast.LENGTH_SHORT).show();
         final UnitRows unitRows = UnitRows.getInstance();
         ArrayList su_rows = unitRows.getRows();
+        m_Adapter.clear();
         if (!force && su_rows != null) {
-            m_Adapter.clear();
+
             for (int i = 0, m = su_rows.size(); i < m; i++) {
                 m_Adapter.add((JSONObject) su_rows.get(i));
             }
@@ -108,8 +109,6 @@ public class FragmentUnitsLists extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-
-                        m_Adapter.clear();
                         JSONArray su_rows = response.getJSONArray("su_rows");
                         unitRows.setRows(su_rows);
                         for (int i = 0, m = su_rows.length(); i < m; i++) {

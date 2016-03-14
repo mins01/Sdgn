@@ -53,6 +53,7 @@ public class UnitRows {
         if (unit_rows == null) {
             unit_rows = new ArrayList<>();
         }
+        unit_rows.clear();
         try {
 
             for (int i = 0, m = jsonArray.length(); i < m; i++) {
