@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="--------유닛명--------"
+        android:text="----"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:textSize="16dp"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="유닛타입"
+        android:text="----"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:textSize="12dp"
@@ -53,7 +53,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:textStyle="bold|italic"
-        android:text="Z"
+        android:text="-"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:textSize="30dp"

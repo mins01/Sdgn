@@ -108,21 +108,21 @@ public class SdgnDetailActivity extends AppCompatActivity {
 
 
             //-- 내용 부분
-            String tmp;
-            LinearLayout imgs, texts;
-
-            imgs = (LinearLayout) this.findViewById(R.id.group_unit_weapon_img);
-            texts = (LinearLayout) this.findViewById(R.id.group_unit_weapon);
-            for (int i = 0, m = 3; i < m; i++) {
-                tmp = row.getString("unit_weapon" + (i + 1) + "_img");
-                if (tmp != null && tmp.length() > 1) {
-                    ((NetworkImageView) imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-                    ((TextView) texts.getChildAt(i)).setText(row.getString("unit_weapon" + (i + 1)));
-                } else {
-                    ((NetworkImageView) imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
-                    ((TextView) texts.getChildAt(i)).setText("");
-                }
-            }
+//            String tmp;
+//            LinearLayout imgs, texts;
+//
+//            imgs = (LinearLayout) this.findViewById(R.id.group_unit_weapon_img);
+//            texts = (LinearLayout) this.findViewById(R.id.group_unit_weapon);
+//            for (int i = 0, m = 3; i < m; i++) {
+//                tmp = row.getString("unit_weapon" + (i + 1) + "_img");
+//                if (tmp != null && tmp.length() > 1) {
+//                    ((NetworkImageView) imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
+//                    ((TextView) texts.getChildAt(i)).setText(row.getString("unit_weapon" + (i + 1)));
+//                } else {
+//                    ((NetworkImageView) imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
+//                    ((TextView) texts.getChildAt(i)).setText("");
+//                }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,6 +158,7 @@ public class SdgnDetailActivity extends AppCompatActivity {
                     SimpleDateFormat formater = new SimpleDateFormat("yy.M.d h:m");
 
 //                    ViewGroup parent = (ViewGroup) SdgnDetailActivity.this.getWindow().getDecorView().getRootView();
+                    linearLayout_bc_rows.removeAllViews();
                     for (int i = 0, m = bc_rows.length(); i < m; i++) {
 //                        m_Adapter.add((JSONObject) bc_rows.get(i));
                         JSONObject bc_row = (JSONObject) bc_rows.get(i);

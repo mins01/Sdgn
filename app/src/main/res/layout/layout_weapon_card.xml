@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/list_row_relativeLayout"
+    android:padding="2dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/half_margin"
+    android:clickable="false">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="사거리"
+        android:id="@+id/sw_range"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="114dp"
+        android:layout_height="64dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/half_margin"
+        android:id="@+id/sw_img"
+        android:layout_weight="1"
+        android:contentDescription="무기이미지" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Cost"
+        android:id="@+id/sw_cost"
+        android:layout_marginLeft="@dimen/half_margin"
+        android:layout_alignBottom="@+id/sw_img"
+        android:layout_alignRight="@+id/sw_img"
+        android:layout_alignEnd="@+id/sw_img"
+        android:textColor="@color/colorUnitRankA"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="무기이름"
+        android:id="@+id/sw_name"
+        android:paddingLeft="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="설명"
+        android:id="@+id/sw_desc"
+        android:paddingLeft="130dp"
+        android:layout_below="@+id/sw_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="작성자"
+        android:id="@+id/m_nick"
+        android:paddingLeft="130dp"
+        android:textAlignment="textEnd"
+        android:layout_below="@+id/sw_desc"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorUnitRankB"
+        />
+
+</RelativeLayout>
