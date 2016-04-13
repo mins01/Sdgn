@@ -12,16 +12,27 @@
     <include layout="@layout/content_lists" />
 
     <Button
+        android:id="@+id/main_btn_search"
+        android:textStyle="bold"
+        android:textSize="0sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="5dp"
+
+        android:background="@android:drawable/ic_menu_search" />
+
+    <Button
         android:id="@+id/main_btn_reload"
         android:textStyle="bold"
         android:textSize="0sp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginRight="5dp"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|left"
         android:layout_marginBottom="5dp"
 
-        android:background="@android:drawable/ic_menu_rotate"
-        android:text="" />
+        android:background="@android:drawable/ic_menu_rotate" />
 
 </android.support.design.widget.CoordinatorLayout>

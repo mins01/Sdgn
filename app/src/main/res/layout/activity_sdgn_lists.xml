@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 이거 더이상 안 씀 -->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,9 +45,8 @@
     <!--ads:adSize="BANNER"-->
     <!--ads:adUnitId="@string/admob_unser_banner">-->
     <!--</com.google.android.gms.ads.AdView>-->
-
     <Button
-        android:id="@+id/main_btn_reload"
+        android:id="@+id/main_btn_search"
         android:textStyle="bold"
         android:textSize="0sp"
         android:layout_width="60dp"
@@ -55,7 +55,18 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="5dp"
 
-        android:background="@android:drawable/ic_menu_rotate"
+        android:background="@android:drawable/ic_menu_search"
         android:text="" />
+    <Button
+        android:id="@+id/main_btn_reload"
+        android:textStyle="bold"
+        android:textSize="0sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="5dp"
+
+        android:background="@android:drawable/ic_menu_rotate" />
 
 </android.support.design.widget.CoordinatorLayout>

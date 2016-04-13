@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class UnitRows {
     private static UnitRows instacne = null;
     public ArrayList<JSONObject> unit_rows = null;
+    public int su_cnt = 0;
+    public int su_cnt_all = 0;
 
     public UnitRows() {
         //unit_rows = new JSONArray();
@@ -63,6 +65,4 @@ public class UnitRows {
             e.printStackTrace();
         }
     }
-
-
 }

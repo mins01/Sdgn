@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="검색필터"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Rank "
+        android:textStyle="italic|bold"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/half_margin"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S랭크"
+            android:id="@+id/sh_unit_ranks_S"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A랭크"
+            android:id="@+id/sh_unit_ranks_A"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B랭크"
+            android:id="@+id/sh_unit_ranks_B"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C랭크"
+            android:id="@+id/sh_unit_ranks_C"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Type "
+        android:textStyle="italic|bold"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/half_margin"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="어썰트"
+            android:id="@+id/sh_unit_properties_1"
+            android:layout_weight="1"
+            />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="밸런스"
+            android:id="@+id/sh_unit_properties_2"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="슈터"
+            android:id="@+id/sh_unit_properties_3"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Unit "
+        android:textStyle="italic|bold"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/half_margin"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sh_unit_name"
+        android:singleLine="true"
+        android:hint="유닛명"
+        />
+
+
+
+</LinearLayout>

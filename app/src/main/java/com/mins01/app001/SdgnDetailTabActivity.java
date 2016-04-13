@@ -656,7 +656,7 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
         //키보드 제어용
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         // setup a dialog window
-        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder.setCancelable(true)
                 .setPositiveButton("남기기", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //resultText.setText("Hello, " + editText.getText());
