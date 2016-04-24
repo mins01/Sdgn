@@ -24,6 +24,8 @@ public class UnitCardHolder {
     TextView txtview_unit_properties;
     TextView txtview_unit_rank;
     ArrayList<ImageView> imageview_avg_stars = new ArrayList<>();
+    TextView textview_unit_is_weapon_change;
+    TextView textview_unit_is_transform;
 
     public void setMemberVar(View convertView) {
         this.list_row_imageView = (NetworkImageView) convertView.findViewById(R.id.list_row_imageView);
@@ -35,6 +37,9 @@ public class UnitCardHolder {
         this.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_2));
         this.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_3));
         this.imageview_avg_stars.add((ImageView) convertView.findViewById(R.id.imageview_avg_star_4));
+
+        this.textview_unit_is_weapon_change = (TextView) convertView.findViewById(R.id.textview_unit_is_weapon_change);
+        this.textview_unit_is_transform = (TextView) convertView.findViewById(R.id.textview_unit_is_transform);
     }
 
     public void setValues(JSONObject row, View convertView) {
@@ -96,6 +101,19 @@ public class UnitCardHolder {
                     txtview_unit_properties.setBackgroundResource(R.drawable.bg_unit_type_1);
                     break;
             }
+            if(row.getInt("unit_is_weapon_change")==1){
+                this.textview_unit_is_weapon_change.setVisibility(View.VISIBLE);
+            }else{
+                this.textview_unit_is_weapon_change.setVisibility(View.GONE);
+            }
+            if(row.getInt("unit_is_transform")==1){
+                this.textview_unit_is_transform.setVisibility(View.VISIBLE);
+            }else{
+                this.textview_unit_is_transform.setVisibility(View.GONE);
+            }
+
+
+
             list_row_imageView.setImageUrl(row.getString("unit_img"), MySingleton.getInstance(context).getImageLoader());
         } catch (JSONException e) {
             e.printStackTrace();

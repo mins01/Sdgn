@@ -24,12 +24,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private long backpress_time_ms = 0;
     private UserSession usess;
     private NavigationView navigationView;
+
+    private AdView mAdView; //광고용
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         backpress_time_ms = System.currentTimeMillis();
@@ -52,6 +58,10 @@ public class MainActivity extends AppCompatActivity
         showFragment(R.id.nav_units_lists);
 
         usess = UserSession.getInstance(this.getApplicationContext());
+
+        initAdMob();
+
+
     }
 
     @Override
@@ -63,6 +73,7 @@ public class MainActivity extends AppCompatActivity
 
         initEvent();
         syncUsess();
+
     }
 
     @Override
@@ -70,6 +81,7 @@ public class MainActivity extends AppCompatActivity
         //MySingleton.getInstance(this).start();
         Log.i("onRestart", "START");
         super.onRestart();
+
         Log.i("onRestart", "END");
     }
 
@@ -77,7 +89,7 @@ public class MainActivity extends AppCompatActivity
     public void onResume() {
         Log.i("onResume", "START");
         super.onResume();
-//        adView.resume();
+        mAdView.resume();
         Log.i("onResume", "END");
 
 
@@ -89,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         Log.i("onPause", "START");
 //        adView.pause();
         super.onPause();
+        mAdView.pause();
         Log.i("onPause", "END");
     }
 
@@ -102,6 +115,7 @@ public class MainActivity extends AppCompatActivity
         Log.i("onDestroy", "START");
 //        adView.destroy();
         super.onDestroy();
+        mAdView.destroy();
         //MySingleton.getInstance(this).stop();
         Log.i("onDestroy", "END");
     }
@@ -123,6 +137,15 @@ public class MainActivity extends AppCompatActivity
             }
             //super.onBackPressed();
         }
+    }
+
+    private void initAdMob() {
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice("2C251C7B8EEA8AF17FBA97F61D60D7C6")
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -203,6 +226,7 @@ public class MainActivity extends AppCompatActivity
         showAvtivity(id);
     }
     public boolean showAvtivity(int id){
+        Intent intent;
         switch (id){
             case R.id.linearLayout_login:
                 if(usess.m_nick.length()>0){
@@ -227,9 +251,15 @@ public class MainActivity extends AppCompatActivity
                 }
             //case R.id.nav_login:
                 Context context = this.getBaseContext();
-                Intent intent = new Intent(context, LoginActivity.class);
+                intent = new Intent(context, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                return false;
+            case R.id.textView_mins01_com:
+                Toast.makeText(MainActivity.this, "건넥한마디 사이트로 이동합니다.", Toast.LENGTH_SHORT).show();
+                Uri uri = Uri.parse("http://www.mins01.com/sdgn");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 return false;
             default:
                 if (!showFragment(id)) {
@@ -275,7 +305,7 @@ public class MainActivity extends AppCompatActivity
         if(usess.m_nick.length()>0){ //로그인된 사용자명
             textView_nav_m_nick.setText(usess.m_nick);
         }else{
-            textView_nav_m_nick.setText("로그인이 필요합니다.");
+            textView_nav_m_nick.setText("로그인이 필요합니다.\n사이트에서 회원가입이 가능합니다.");
         }
     }
 

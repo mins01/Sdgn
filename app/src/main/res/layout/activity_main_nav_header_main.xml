@@ -33,9 +33,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_mins01_com"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="http://www.mins01.com/sdgn" />
+        android:text="http://www.mins01.com/sdgn"
+        android:onClick="btnClick"/>
 
 </LinearLayout>

@@ -89,6 +89,37 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ETC "
+        android:textStyle="italic|bold"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/half_margin"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="웨폰체인지"
+            android:id="@+id/sh_unit_is_weapon_change"
+            android:layout_weight="1"
+            />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="변신"
+            android:id="@+id/sh_unit_is_transform"
+            android:layout_weight="1"/>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

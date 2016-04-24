@@ -49,6 +49,8 @@ public class FragmentUnitsLists extends Fragment {
     private Boolean sh_unit_properties_1 = false;
     private Boolean sh_unit_properties_2 = false;
     private Boolean sh_unit_properties_3 = false;
+    private Boolean sh_unit_is_weapon_change = false;
+    private Boolean sh_unit_is_transform = false;
 
     private int sh_cnt = 0;
     private int sh_cnt_all = 0;
@@ -170,6 +172,12 @@ public class FragmentUnitsLists extends Fragment {
             if(sh_unit_properties_3){
                 strs.add(URLEncoder.encode("unit_properties_nums[]","UTF-8")+"=3");
             }
+            if(sh_unit_is_weapon_change){
+                strs.add(URLEncoder.encode("unit_is_weapon_change","UTF-8")+"=1");
+            }
+            if(sh_unit_is_transform){
+                strs.add(URLEncoder.encode("unit_is_transform","UTF-8")+"=1");
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -226,6 +234,10 @@ public class FragmentUnitsLists extends Fragment {
         sh_unit_ranks_A = ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_A)).isChecked();
         sh_unit_ranks_B = ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_B)).isChecked();
         sh_unit_ranks_C = ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_C)).isChecked();
+
+        sh_unit_is_weapon_change = ((CheckBox)searchAlert.findViewById(R.id.sh_unit_is_weapon_change)).isChecked();
+        sh_unit_is_transform = ((CheckBox)searchAlert.findViewById(R.id.sh_unit_is_transform)).isChecked();
+
     }
     private void loadShQstr(){
         ((EditText)searchAlert.findViewById(R.id.sh_unit_name)).setText(sh_unit_name);
@@ -237,6 +249,9 @@ public class FragmentUnitsLists extends Fragment {
         ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_A)).setChecked(sh_unit_ranks_A);
         ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_B)).setChecked(sh_unit_ranks_B);
         ((CheckBox)searchAlert.findViewById(R.id.sh_unit_ranks_C)).setChecked(sh_unit_ranks_C);
+
+        ((CheckBox)searchAlert.findViewById(R.id.sh_unit_is_weapon_change)).setChecked(sh_unit_is_weapon_change);
+        ((CheckBox)searchAlert.findViewById(R.id.sh_unit_is_transform)).setChecked(sh_unit_is_transform);
     }
     private void firstLoad() {
         this.firstLoad(false);
