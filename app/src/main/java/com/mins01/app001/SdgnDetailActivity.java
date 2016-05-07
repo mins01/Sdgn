@@ -44,6 +44,8 @@ public class SdgnDetailActivity extends AppCompatActivity {
         unit_idx = getIntent().getIntExtra("unit_idx", 0);
         row = unitrow.getRowByUnitIdx(unit_idx);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         firstAction();
         Log.i("onCreate", "END");
     }

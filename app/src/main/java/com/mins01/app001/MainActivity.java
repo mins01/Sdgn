@@ -275,6 +275,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_units_lists:
                 fr = new FragmentUnitsLists();
                 break;
+            case R.id.nav_last_plan:
+                fr = new FragmentLastPlan();
+                break;
 //            case R.id.nav_test:
 //                fr = new FragmentTest();
 //                break;

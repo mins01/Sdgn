@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/half_margin"
+    android:paddingLeft="@dimen/half_margin"
+    android:paddingRight="@dimen/half_margin"
+    android:paddingTop="@dimen/half_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    tools:context="com.mins01.app001.SdgnDetailActivity"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="박스이름"
+        android:id="@+id/sb_label"
+        android:layout_marginRight="@dimen/half_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="박스설명"
+        android:id="@+id/sb_desc"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="박스 최종 설명"
+        android:id="@+id/suib_desc"/>
+</LinearLayout>

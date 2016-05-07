@@ -4,6 +4,9 @@
         <item
             android:id="@+id/nav_units_lists"
             android:title="유닛목록" />
+        <item
+            android:id="@+id/nav_last_plan"
+            android:title="최근 일정" />
     </group>
     <!--<group android:checkableBehavior="single">-->
         <!--<item-->

@@ -76,7 +76,8 @@ public class FragmentUnitsLists extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(this.getClass().getName(), "onActivityCreated");
         super.onActivityCreated(savedInstanceState);
-
+        this.initUI();
+//        this.firstLoad(true);
         firstAction();
 
     }
@@ -333,9 +334,12 @@ public class FragmentUnitsLists extends Fragment {
             @Override
             protected void onPostExecute(FragmentUnitsLists result) {
                 //super.onPostExecute(result);
-                result.initUI();
+//                result.initUI();
                 //result.initAdMob();
-                result.firstLoad(true);
+                if(isAdded()){
+                    result.firstLoad();
+                }
+
             }
 
         }).execute(this);

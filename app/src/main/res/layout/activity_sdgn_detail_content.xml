@@ -9,64 +9,136 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="스킬"
-            android:textColor="#000"
-            android:background="@drawable/layout_rounded_gray" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/half_margin"
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:layout_width="0dp"
+            android:orientation="vertical"
+            android:id="@+id/box_skill_0"
+            >
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="스킬"
+                android:textColor="#000"
+                android:background="@drawable/layout_rounded_gray" />
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:contentDescription="스킬1"
-                    android:id="@+id/imageView_skill1_img" />
-
-                <TextView
-                    android:id="@+id/imageView_skill1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="스킬1"
-                    android:gravity="left"
-                    android:layout_toRightOf="@+id/imageView_skill1_img" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/half_margin"
+                android:weightSum="2">
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:contentDescription="스킬2"
-                    android:id="@+id/imageView_skill2_img" />
-
-                <TextView
-                    android:id="@+id/imageView_skill2"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="스킬2"
-                    android:gravity="left"
-                    android:layout_toRightOf="@+id/imageView_skill2_img" />
-            </RelativeLayout>
+                    android:layout_weight="1">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:contentDescription="스킬1"
+                        android:id="@+id/imageView_skill1_img" />
+
+                    <TextView
+                        android:id="@+id/imageView_skill1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스킬1"
+                        android:gravity="left"
+                        android:layout_toRightOf="@+id/imageView_skill1_img" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:contentDescription="스킬2"
+                        android:id="@+id/imageView_skill2_img" />
+
+                    <TextView
+                        android:id="@+id/imageView_skill2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스킬2"
+                        android:gravity="left"
+                        android:layout_toRightOf="@+id/imageView_skill2_img" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/box_skill_1"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="스킬 (변신 후)"
+                android:textColor="#000"
+                android:background="@drawable/layout_rounded_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/half_margin"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:contentDescription="스킬4"
+                        android:id="@+id/imageView_skill4_img" />
+
+                    <TextView
+                        android:id="@+id/imageView_skill4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스킬4"
+                        android:gravity="left"
+                        android:layout_toRightOf="@+id/imageView_skill4_img" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:contentDescription="스킬5"
+                        android:id="@+id/imageView_skill5_img" />
+
+                    <TextView
+                        android:id="@+id/imageView_skill5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스킬5"
+                        android:gravity="left"
+                        android:layout_toRightOf="@+id/imageView_skill5_img" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -112,16 +184,16 @@
                 <com.android.volley.toolbox.NetworkImageView
                     android:layout_width="52dp"
                     android:layout_height="52dp"
-                    android:contentDescription="스킬4"
-                    android:id="@+id/imageView_skill4_img" />
+                    android:contentDescription="스킬6"
+                    android:id="@+id/imageView_skill6_img" />
 
                 <TextView
-                    android:id="@+id/imageView_skill4"
+                    android:id="@+id/imageView_skill6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="스킬4"
+                    android:text="스킬6"
                     android:gravity="left"
-                    android:layout_toRightOf="@+id/imageView_skill4_img" />
+                    android:layout_toRightOf="@+id/imageView_skill6_img" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -153,6 +225,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/box_weapon_0_1"
+            android:visibility="gone"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -161,7 +234,7 @@
                 android:layout_margin="5dp"
                 android:padding="5dp"
 
-                android:text="변신후 무기"
+                android:text="변신 후 무기"
                 android:textColor="#000"
                 android:background="@drawable/layout_rounded_gray" />
             <LinearLayout
@@ -175,7 +248,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/box_weapon_0_2"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+
+                android:text="2차 변신 후  무기"
+                android:textColor="#000"
+                android:background="@drawable/layout_rounded_gray" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/weapon_0_2">
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:id="@+id/box_weapon_1_0"
+            android:visibility="gone"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -199,6 +297,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/box_weapon_1_1"
+            android:visibility="gone"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -217,151 +316,29 @@
                 android:id="@+id/weapon_1_1">
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/box_box"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:id="@+id/group_unit_weapons_0">-->
+                android:text="입수방법"
+                android:textColor="#000"
+                android:background="@drawable/layout_rounded_gray" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/box_box_0">
+            </LinearLayout>
+        </LinearLayout>
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="20sp"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:padding="5dp"-->
-
-                <!--android:text="무기"-->
-                <!--android:textColor="#000"-->
-                <!--android:background="@drawable/layout_rounded_gray" />-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:id="@+id/group_unit_weapon_img"-->
-                <!--android:weightSum="3">-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기1" />-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기2" />-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기3" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:id="@+id/group_unit_weapon"-->
-                <!--android:weightSum="3">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기1"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기2"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기3"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:id="@+id/group_unit_weapons_1">-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="20sp"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:padding="5dp"-->
-
-                <!--android:text="무기 (변신 후)"-->
-                <!--android:textColor="#000"-->
-                <!--android:background="@drawable/layout_rounded_gray" />-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:id="@+id/group_unit_weapon_img_1"-->
-                <!--android:weightSum="3">-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기4" />-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기5" />-->
-
-                <!--<com.android.volley.toolbox.NetworkImageView-->
-                    <!--android:layout_width="114dp"-->
-                    <!--android:layout_height="64dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:contentDescription="무기6" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:id="@+id/group_unit_weapon_1"-->
-                <!--android:weightSum="3">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기4"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기5"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="무기6"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
     </LinearLayout>
 </ScrollView>

@@ -45,6 +45,7 @@ import java.util.Map;
 public class SdgnDetailTabActivity extends AppCompatActivity {
     private JSONObject row;
     private JSONArray sw_rows;
+    private JSONArray sb_rows;
     private int unit_idx;
 
     public static final int MY_SOCKET_TIMEOUT_MS = 5000; //5초
@@ -288,14 +289,31 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
 
             //-- 스킬
             NetworkImageView niv = null;
-            final int[] niv_ids = {R.id.imageView_skill1_img, R.id.imageView_skill2_img, R.id.imageView_skill3_img, R.id.imageView_skill4_img};
-            final int[] tv_ids = {R.id.imageView_skill1, R.id.imageView_skill2, R.id.imageView_skill3, R.id.imageView_skill4};
-            for (int i = 0, m = 4; i < m; i++) {
+            final int[] niv_ids = {R.id.imageView_skill1_img, R.id.imageView_skill2_img,
+                    R.id.imageView_skill3_img, R.id.imageView_skill4_img,
+                    R.id.imageView_skill5_img, R.id.imageView_skill6_img
+            };
+            final int[] tv_ids = {R.id.imageView_skill1, R.id.imageView_skill2,
+                    R.id.imageView_skill3, R.id.imageView_skill4,
+                    R.id.imageView_skill5, R.id.imageView_skill6
+            };
+
+            int unit_is_change_skill = row.getInt("unit_is_change_skill");
+            if(unit_is_change_skill==1){
+                ((LinearLayout) view.findViewById(R.id.box_skill_1)).setVisibility(View.VISIBLE);
+            }
+
+            for (int i = 0, m = 6; i < m; i++) {
+                if(unit_is_change_skill==0) {
+                    if(i==3 || i==4){
+                        continue;
+                    }
+                }
                 if (!row.isNull("unit_skill" + (i + 1) + "_img")) {
                     tmp = row.getString("unit_skill" + (i + 1) + "_img");
 
                     ((NetworkImageView) view.findViewById(niv_ids[i])).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-                    if (i == 3) {
+                    if (i == 5) {
                         if(unit_is_transform==1){
                             ((TextView) view.findViewById(tv_ids[i])).setText("(변신 후)\n[" + row.getString("unit_skill" + (i + 1)) + "]\n" + row.getString("unit_skill" + (i + 1) + "_desc"));
                         }else{
@@ -339,9 +357,18 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
                         v = generateWeaponCard(context,sw_row);
                         tagetView.addView(v);
                     }
+                    ((LinearLayout) this.findViewById(R.id.box_weapon_0_1)).setVisibility(View.VISIBLE);
+                }
 
-                }else{
-                    ((LinearLayout) this.findViewById(R.id.box_weapon_0_1)).setVisibility(View.GONE);
+                sw_rows_tmp = sw_rows_0.getJSONArray(2); //기본무기- 2차 변신 후 무기배열
+                if(sw_rows_tmp.length()>0){
+                    tagetView = (LinearLayout) this.findViewById(R.id.weapon_0_2);
+                    for(int i=0,m=sw_rows_tmp.length();i<m;i++){
+                        JSONObject sw_row = sw_rows_tmp.getJSONObject(i);
+                        v = generateWeaponCard(context,sw_row);
+                        tagetView.addView(v);
+                    }
+                    ((LinearLayout) this.findViewById(R.id.box_weapon_0_2)).setVisibility(View.VISIBLE);
                 }
 
                 JSONArray sw_rows_1 = sw_rows.getJSONArray(1); //추가 기본무기 배열
@@ -353,10 +380,9 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
                         v = generateWeaponCard(context,sw_row);
                         tagetView.addView(v);
                     }
-
-                }else{
-                    ((LinearLayout)this.findViewById(R.id.box_weapon_1_0)).setVisibility(View.GONE);
+                    ((LinearLayout)this.findViewById(R.id.box_weapon_1_0)).setVisibility(View.VISIBLE);
                 }
+
                 sw_rows_tmp = sw_rows_1.getJSONArray(1); //추가무기-변신후 무기배열
                 if(sw_rows_tmp.length()>0){
                     tagetView = (LinearLayout) this.findViewById(R.id.weapon_1_1);
@@ -365,49 +391,17 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
                         v = generateWeaponCard(context,sw_row);
                         tagetView.addView(v);
                     }
-
-                }else{
-                    ((LinearLayout) this.findViewById(R.id.box_weapon_1_1)).setVisibility(View.GONE);
+                    ((LinearLayout) this.findViewById(R.id.box_weapon_1_1)).setVisibility(View.VISIBLE);
                 }
 
             }else{
                 Log.e("기본 무기","0");
             }
-
-
-
-//            //-- 무기 변신 전
-//            imgs = (LinearLayout) view.findViewById(R.id.group_unit_weapon_img);
-//            texts = (LinearLayout) view.findViewById(R.id.group_unit_weapon);
-//            for (int i = 0, m = 3; i < m; i++) {
-//                if (!row.isNull("unit_weapon" + (i + 1) + "_img")) {
-//                    tmp = row.getString("unit_weapon" + (i + 1) + "_img");
-//                    ((NetworkImageView) imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-//                    ((TextView) texts.getChildAt(i)).setText(row.getString("unit_weapon" + (i + 1)));
-//                } else {
-//                    ((NetworkImageView) imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
-//                    ((TextView) texts.getChildAt(i)).setText("");
-//                }
-//            }
-//
-//            //-- 무기 변신 후
-//            LinearLayout group_unit_weapon_1 = (LinearLayout) view.findViewById(R.id.group_unit_weapons_1);
-//
-//            group_unit_weapon_1.setVisibility(unit_is_transform == 1 ? View.VISIBLE : View.GONE);
-//            if (unit_is_transform == 1) {
-//                imgs = (LinearLayout) view.findViewById(R.id.group_unit_weapon_img_1);
-//                texts = (LinearLayout) view.findViewById(R.id.group_unit_weapon_1);
-//                for (int i = 0, m = 3; i < m; i++) {
-//                    if (!row.isNull("unit_weapon" + (i + 3 + 1) + "_img")) {
-//                        tmp = row.getString("unit_weapon" + (i + 3 + 1) + "_img");
-//                        ((NetworkImageView) imgs.getChildAt(i)).setImageUrl(tmp, MySingleton.getInstance(context).getImageLoader());
-//                        ((TextView) texts.getChildAt(i)).setText(row.getString("unit_weapon" + (i + 3 + 1)));
-//                    } else {
-//                        ((NetworkImageView) imgs.getChildAt(i)).setImageResource(android.R.color.transparent);//초기화
-//                        ((TextView) texts.getChildAt(i)).setText("");
-//                    }
-//                }
-//            }
+            if(sb_rows.length()==0){
+                ((LinearLayout) view.findViewById(R.id.box_box)).setVisibility(View.GONE);
+            }else{
+                add_sb_rows((LinearLayout) view.findViewById(R.id.box_box_0), this.sb_rows);
+            }
 
 
         } catch (Exception e) {
@@ -455,6 +449,43 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
         }
 
         return v;
+    }
+
+    public void add_sb_rows(ViewGroup parent,JSONArray sb_rows){
+        try {
+            Context context = parent.getContext();
+            parent.removeAllViews();
+
+            for (int i = 0, m = sb_rows.length(); i < m; i++) {
+                JSONObject bc_row = (JSONObject) sb_rows.get(i);
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View convertView = inflater.inflate(R.layout.sb_row, parent, false);
+                TextView t = (TextView) convertView.findViewById(R.id.sb_label);
+                String t2 = bc_row.getString("sb_label");
+                if(t2.length()==0){
+                    t.setVisibility(View.GONE);
+                }else{
+                    t.setText(t2);
+                }
+                t = (TextView) convertView.findViewById(R.id.sb_desc);
+                t2 = bc_row.getString("sb_desc");
+                if(t2.length()==0){
+                    t.setVisibility(View.GONE);
+                }else{
+                    t.setText("<"+t2+">");
+                }
+                t = (TextView) convertView.findViewById(R.id.suib_desc);
+                t2 = bc_row.getString("suib_desc");
+                if(t2.length()==0){
+                    t.setVisibility(View.GONE);
+                }else{
+                    t.setText(t2);
+                }
+                parent.addView(convertView);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void add_bc_rows(ViewGroup parent,JSONArray bc_rows){
@@ -529,6 +560,8 @@ public class SdgnDetailTabActivity extends AppCompatActivity {
 //                    m_Adapter.clear();
                     thisC.row = response.getJSONObject("su_row");
                     thisC.sw_rows = response.getJSONArray("sw_rows");
+                    thisC.sb_rows = response.getJSONArray("sb_rows");
+
                     thisC.initSectionsPagerAdapter();
                     thisC.initDetailTop();
                 } catch (Exception e) {
